@@ -20,7 +20,7 @@ export const getAllEventTypes = () => {
 }
 
 export const getAllEvents = () => {
-    return fetch("http://localhost:8088/events")
+    return fetch("http://localhost:8088/events?_expand=eventType&_expand=user")
     .then(res => res.json())
 }
 export const getAllUserProfiles = () => {

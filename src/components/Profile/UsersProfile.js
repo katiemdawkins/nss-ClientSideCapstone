@@ -30,7 +30,7 @@ export const UserProfile = () => {
         },
         []
     )
-    
+
     useEffect(
         ()=>{
             allUsersState()
@@ -48,12 +48,9 @@ export const UserProfile = () => {
     // )
 
 
-
-//need to add an if statement to make sure only the users profile 
-//is being displayed to the logged in user
     return(
         <>
-        {
+         {
             userProfiles.map(
                 (userProfile) => {
                     if(userProfile.userId === parseInt(localStorage.getItem("in_my_lane_coach"))){
@@ -63,7 +60,7 @@ export const UserProfile = () => {
                             <p>Specialties: {userProfile.specialties}</p>
                             <p>My Website: {userProfile.website}</p>
                             <p>Email: {userProfile.email}</p>
-                            <p>Taking Clients: {userProfile.takingClients}</p>
+                            <p>Taking NewClients: {userProfile.takingClients? "Yes": "No"}</p>
                             <p>Works with clients: {userProfile.serviceLocation.name}</p>
                             <p>{userProfile.location}</p>
                             <p>About {userProfile.fullName}: {userProfile.bio}</p>
@@ -73,15 +70,18 @@ export const UserProfile = () => {
                 }
             )
         }
-        {
-            allUsers.map(
-                (user)=>{
-                    if (user.id === parseInt(localStorage.getItem("in_my_lane_coach"))){
-                        return <button>Edit Your Profile Here</button>
-                    }
-                }
-            )
-        }
+
         </>
     )
 }
+
+        // {
+        //     allUsers.map(
+        //         (user)=>{
+        //             if (user.id === parseInt(localStorage.getItem("in_my_lane_coach"))){
+        //                 return <div>
+        //                     </div>
+        //             }
+        //         }
+        //     )
+        // }

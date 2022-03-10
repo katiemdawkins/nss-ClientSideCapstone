@@ -1,5 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { MiniProfiles } from "./Connect/Connect"
+import { CreateEvent } from "./Events/CreateEvent"
+import { DisplayEvents } from "./Events/Events"
 import { HomePage } from "./home/Home"
 import { UserProfile } from "./Profile/UsersProfile"
 
@@ -9,15 +12,17 @@ export const ApplicationViews = () => {
             <Route exact path="/">
                 <HomePage />
             </Route>
-             <Route path="/myProfile">
-                <h1>My Profile</h1>
+             <Route exact path="/myProfile">
                 <UserProfile />
             </Route>
             <Route path="/connect">
-                <h1>Connect</h1>
+                <MiniProfiles />
             </Route>
-            <Route path="/eventsCourses">
-                <h1>Events + Courses</h1>
+            <Route exact path="/eventsCourses">
+                <DisplayEvents />
+            </Route>
+            <Route exact path="/eventsCourses/create">
+                <CreateEvent />
             </Route>
         </>
     )
