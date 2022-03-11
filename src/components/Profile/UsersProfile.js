@@ -38,15 +38,6 @@ export const UserProfile = () => {
         []
     )
 
-    // useEffect(
-    //     () =>{
-    //         const profiles = userProfileState()
-    //         const users = allUsersState()
-
-    //         const foundCurrentUser = 
-    //     }
-    // )
-
 
     return(
         <>
@@ -55,7 +46,7 @@ export const UserProfile = () => {
                 (userProfile) => {
                     if(userProfile.userId === parseInt(localStorage.getItem("in_my_lane_coach"))){
                     return <div className="profileInfo" key={`user--${userProfile.id}`}>
-                            <h2>{userProfile.fullName}</h2>
+                            <h2>{userProfile.firstName} {userProfile.lastName}</h2>
                             <h3>{userProfile.coachType.name}</h3>
                             <p>Specialties: {userProfile.specialties}</p>
                             <p>My Website: {userProfile.website}</p>
@@ -65,7 +56,8 @@ export const UserProfile = () => {
                             <p>{userProfile.location}</p>
                             <p>About {userProfile.fullName}: {userProfile.bio}</p>
                             <p>Events + Courses: {userProfile.event.name}</p>
-                    </div>
+                            <button>Edit Profile</button>
+                        </div>
                     }
                 }
             )
@@ -75,13 +67,11 @@ export const UserProfile = () => {
     )
 }
 
-        // {
-        //     allUsers.map(
-        //         (user)=>{
-        //             if (user.id === parseInt(localStorage.getItem("in_my_lane_coach"))){
-        //                 return <div>
-        //                     </div>
-        //             }
-        //         }
-        //     )
-        // }
+//need to get a create profile button for new users
+// {
+//     allUsers.map(
+//         (user) => {
+//             if( user.id )
+//         }
+//     )
+// }

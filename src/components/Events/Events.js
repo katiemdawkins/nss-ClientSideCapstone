@@ -6,7 +6,7 @@ import "./Events.css"
 export const DisplayEvents = () => {
     const [ events, setEvents] = useState([])
     const history = useHistory()
-    const [ userProfiles, setUserProfiles] = useState([])
+
 
     const eventsState = () => {
         getAllEvents()
@@ -19,19 +19,6 @@ export const DisplayEvents = () => {
     useEffect(
         ()=>{
             eventsState()
-        },
-        []
-    )
-
-    const userProfileState = () => {
-        getAllUsers()
-        .then((userProfileData) =>{
-            setUserProfiles(userProfileData)
-        })
-    }
-    useEffect (
-        () =>{
-            userProfileState()
         },
         []
     )

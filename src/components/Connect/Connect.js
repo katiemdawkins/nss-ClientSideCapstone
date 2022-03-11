@@ -31,7 +31,7 @@ export const MiniProfiles = () => {
             userProfiles.map(
                 (userProfile) => {
                     return <div className="profileInfo" key={`user--${userProfile.id}`}>
-                            <h2>{userProfile.fullName}</h2>
+                            <h2>{userProfile.firstName} {userProfile.lastName}</h2>
                             <h3>{userProfile.coachType.name}</h3>
                             <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
                             <p>Works with clients: {userProfile.serviceLocation.name}</p>

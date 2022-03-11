@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom"
-import { getAllCoachTypes, getAllUsers } from "../ApiManager";
+import { getAllCoachTypes, getAllServiceLocations, getAllUsers } from "../ApiManager";
+import "./ProfileForm.css"
 
 //////////////Thursday ----------------------------
 ///figure out how to create a new userProfile 
@@ -9,7 +10,8 @@ export const ProfileForm = () => {
         // userId: 1,
         // coachTypeId: 1,
         // serviceLocationId: 1,
-        // fullName:"",
+        // firstName:"",
+        // lastName:"",
         // specialties: "",
         // website: "",
         // email: "",
@@ -21,6 +23,7 @@ export const ProfileForm = () => {
  
     const history = useHistory()
     const [ coachTypes, setCoachTypes] = useState([])
+    const [ serviceLocations, setServiceLocations ] = useState([])
     
     //import coach types 
     useEffect(
@@ -34,23 +37,28 @@ export const ProfileForm = () => {
     )
 
     //get serviceLocations
-
+    useEffect(
+        getAllServiceLocations()
+        .then((locations)=>
+        setServiceLocations(locations))
+    )
     //create function to submit new form
     const submitProfile =(evt) => {
         evt.preventDefault()
 
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
-            coachTypeId: 1,
+            coachTypeId: parseInt(userProfile.coachTypeId),
             serviceLocationId: 1,
-            fullName:"",
-            specialties: "",
-            website: "",
-            email: "",
-            takingClients: false,
-            bio: "",
-            location: "",
-            eventId: 1
+            firstName: userProfile.firstName,
+            lastName: userProfile.lastName,
+            specialties: userProfile.specialties,
+            website: userProfile.website,
+            email: userProfile.email,
+            takingClients: userProfile.takingClients,
+            bio: userProfile.bio,
+            location: userProfile.location,
+            eventId: 3
         }
 
         const fetchOption = {
@@ -60,54 +68,92 @@ export const ProfileForm = () => {
             },
             body: JSON.stringify(newProfile)
         }
-        return fetch("". fetchOption)
+        return fetch("http://localhost:8088/userProfiles". fetchOption)
         .then (()=>{
-            history.push("")
+            history.push("/myProfile")
         })
     }
-
+/////////////////////////////////////////////////MONDAY!!!!!!!! figure out radio button 
     return (
         <>
             <form>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="name">Full Name:  </label>
+                        <label htmlFor="firstName">First Name:  </label>
                         <input 
                             onChange={
                                 (evt) => {
                                     const copy = {...userProfile}
-                                    copy.fullName = evt.target.value
+                                    copy.firstName = evt.target.value
                                     updateProfile(copy)
                                 }
                             }
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="First and Last Name"
+                            placeholder="Enter your first name"
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="lastName">Last Name:  </label>
+                        <input 
+                            onChange={
+                                (evt) => {
+                                    const copy = {...userProfile}
+                                    copy.lastName = evt.target.value
+                                    updateProfile(copy)
+                                }
+                            }
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter your last name"
                         />
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="location">Coach Type: </label>
+                        <label htmlFor="coachType">Coach Type: </label>
                              <select
                                 onChange={
                                     (evt) => {
                                     const copy = {...userProfile}
-                                    copy.locationId = evt.target.value
+                                    copy.coachTypeId = evt.target.value
                                     updateProfile(copy)
                                     }
                                 }
                                 required autoFocus
                                 className="form-control"
                                 placeholder="Select your coach type">
+                                <option value="0">Choose your coach type...</option>    
                                 {coachTypes.map((coachType) =>{
-                                return <option key={coachType.id}>{coachType.name}</option>
+                                return <option value={coachType.id} key={coachType.id}>{coachType.name}</option>
                                 })}
                             </select>
                     </div>
                 </fieldset>
+
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="specialties">Specialties:  </label>
+                        <input 
+                            onChange={
+                                (evt) => {
+                                    const copy = {...userProfile}
+                                    copy.specialties = evt.target.value
+                                    updateProfile(copy)
+                                }
+                            }
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            placeholder="Share specialties here"
+                        />
+                    </div>
+                </fieldset> 
 
                 <fieldset>
                     <div className="form-group">
@@ -116,33 +162,33 @@ export const ProfileForm = () => {
                             onChange={
                                 (evt) => {
                                     const copy = {...userProfile}
-                                    copy.fullName = evt.target.value
+                                    copy.website = evt.target.value
                                     updateProfile(copy)
                                 }
                             }
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="First and Last Name"
+                            placeholder="www.website.com"
                         />
                     </div>
                 </fieldset>  
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="name">Email:  </label>
+                        <label htmlFor="email">Email:  </label>
                         <input 
                             onChange={
                                 (evt) => {
                                     const copy = {...userProfile}
-                                    copy.fullName = evt.target.value
+                                    copy.email = evt.target.value
                                     updateProfile(copy)
                                 }
                             }
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="First and Last Name"
+                            placeholder="email@email.com"
                         />
                     </div>
                 </fieldset>
@@ -161,6 +207,73 @@ export const ProfileForm = () => {
                         type="checkbox" />
                 </div>
             </fieldset>
+
+            <fieldset>
+                        {serviceLocations.map(
+                            (serviceLocation)=> (
+                                
+                    <div className="form-group">
+                        <label htmlFor="serviceLocation">How do you meet with clients? </label>
+                                <input 
+                                    onChange={
+                                        (evt) => {
+                                            const copy = {...userProfile}
+                                            copy.serviceLocationId = evt.target.value
+                                            updateProfile(copy)
+                                        }
+                                    }
+                                    required autoFocus
+                                    type="radio"
+                                    className="form-control"
+                                    value={serviceLocation.id}
+                                />
+                    </div>
+                            )
+                        )}
+                </fieldset>
+
+            <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="location">Location:  </label>
+                        <input 
+                            onChange={
+                                (evt) => {
+                                    const copy = {...userProfile}
+                                    copy.location = evt.target.value
+                                    updateProfile(copy)
+                                }
+                            }
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter location here"
+                        />
+                        <p>Even if you coach exclusively online, it can be helpful for others to know where you're coaching from. </p>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="bio">Bio:  </label>
+                        <textarea 
+                            onChange={
+                                (evt) => {
+                                    const copy = {...userProfile}
+                                    copy.bio = evt.target.value
+                                    updateProfile(copy)
+                                }
+                            }
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            placeholder="What would you like to share about your background and approach to coaching?"
+                        />
+                    </div>
+                </fieldset>
+
+                <button className="btn btn-primary">
+                Update your Profile
+            </button>
             </form>
         </>
     )

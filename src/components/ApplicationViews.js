@@ -4,6 +4,7 @@ import { MiniProfiles } from "./Connect/Connect"
 import { CreateEvent } from "./Events/CreateEvent"
 import { DisplayEvents } from "./Events/Events"
 import { HomePage } from "./home/Home"
+import { ProfileForm } from "./Profile/ProfileForm"
 import { UserProfile } from "./Profile/UsersProfile"
 
 export const ApplicationViews = () => {
@@ -17,6 +18,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route path="/connect">
                 <MiniProfiles />
+            </Route>
+            <Route exact path="/myProfile/create">
+                <ProfileForm />
             </Route>
             <Route exact path="/eventsCourses">
                 <DisplayEvents />
