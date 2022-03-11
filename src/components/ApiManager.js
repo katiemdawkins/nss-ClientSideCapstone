@@ -1,4 +1,4 @@
-
+//get all the data from API
 export const getAllUsers = () => {
     return fetch ("http://localhost:8088/users")
     .then(res => res.json())
@@ -26,4 +26,11 @@ export const getAllEvents = () => {
 export const getAllUserProfiles = () => {
     return fetch("http://localhost:8088/userProfiles?_expand=event&_expand=coachType&_expand=serviceLocation")
     .then(res => res.json())
+}
+
+//delete event
+export const DeleteEvent = (id) => {
+    return fetch(`http://localhost:8088/events/${id}`, {
+        method: "DELETE"
+    })
 }
