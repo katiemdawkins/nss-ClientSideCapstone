@@ -3,29 +3,40 @@ import { useHistory, useParams } from "react-router-dom"
 import { getAllCoachTypes, getAllServiceLocations, getAllUsers } from "../ApiManager";
 import "./ProfileForm.css"
 
-//////////////Thursday ----------------------------
-///figure out how to create a new userProfile 
+///create a new userProfile 
 export const ProfileForm = () => {
     const [ userProfile, updateProfile ] = useState({
-        // userId: 1,
-        // coachTypeId: 1,
-        // serviceLocationId: 1,
-        // firstName:"",
-        // lastName:"",
-        // specialties: "",
-        // website: "",
-        // email: "",
-        // takingClients: false,
-        // bio: "",
-        // location: "",
-        // eventId: 1
+            userId: 1,
+            coachTypeId: 1,
+            serviceLocationId: 1,
+            firstName: "",
+            lastName: "",
+            specialties: "",
+            website: "",
+            email: "",
+            takingClients: "",
+            bio: "",
+            location: "",
+            eventId: 1
     })
- 
-    const history = useHistory()
     const [ coachTypes, setCoachTypes] = useState([])
     const [ serviceLocations, setServiceLocations ] = useState([])
+
+    const history = useHistory()
+    const { userId } = useParams()
     
-    //import coach types 
+
+    useEffect(
+        ()=>{
+            return fetch(`http://localhost:8088/users/${userId}`)
+            .then(res => res.json())
+            .then((data)=>{
+                updateProfile(data)
+            })
+        },
+        [userId]
+    )
+    //get coachTypes 
     useEffect(
         ()=>{
             getAllCoachTypes()
@@ -35,21 +46,24 @@ export const ProfileForm = () => {
         },
         []
     )
-
     //get serviceLocations
     useEffect(
-        getAllServiceLocations()
-        .then((locations)=>
-        setServiceLocations(locations))
+        () =>{
+            getAllServiceLocations()
+            .then((locations)=>
+            setServiceLocations(locations))
+        },
+        []
     )
-    //create function to submit new form
+
+    //create function to submit new profile
     const submitProfile =(evt) => {
         evt.preventDefault()
 
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
             coachTypeId: parseInt(userProfile.coachTypeId),
-            serviceLocationId: 1,
+            serviceLocationId: parseInt(userProfile.serviceLocationId),
             firstName: userProfile.firstName,
             lastName: userProfile.lastName,
             specialties: userProfile.specialties,
@@ -61,22 +75,22 @@ export const ProfileForm = () => {
             eventId: 3
         }
 
-        const fetchOption = {
-            method: "POST",
+        return fetch(`http://localhost:8088/userProfiles/${userId}`,{
+            method: "PUT",
             headers:{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newProfile)
-        }
-        return fetch("http://localhost:8088/userProfiles". fetchOption)
+
+        })
         .then (()=>{
-            history.push("/myProfile")
+            history.push(`/myProfile/${parseInt(localStorage.getItem("in_my_lane_coach"))}`)
         })
     }
-/////////////////////////////////////////////////MONDAY!!!!!!!! figure out radio button 
+
     return (
-        <>
-            <form>
+            <form className= "profileForm">
+                <h2 className= "profileFormTitle">Create Your Profile</h2>
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="firstName">First Name:  </label>
@@ -92,6 +106,7 @@ export const ProfileForm = () => {
                             type="text"
                             className="form-control"
                             placeholder="Enter your first name"
+                            value= {userProfile.firstName}
                         />
                     </div>
                 </fieldset>
@@ -109,7 +124,7 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="Enter your last name"
+                            value= {userProfile.lastName}
                         />
                     </div>
                 </fieldset>
@@ -138,6 +153,29 @@ export const ProfileForm = () => {
 
                 <fieldset>
                     <div className="form-group">
+                        <label htmlFor="serviceLocations">Services Clients:  </label>
+                        {serviceLocations.map((serviceLocation) => {
+                            return <>
+                            <input 
+                                onChange={
+                                    (evt) => {
+                                        const copy = {...userProfile}
+                                        copy.serviceLocationId = evt.target.checked
+                                        updateProfile(copy)
+                                    }
+                                }
+                                required autoFocus
+                                type="checkbox"
+                                className="form-control"
+                                value={userProfile.serviceLocationId.name}/>
+                            {serviceLocation.name}
+                            </>
+                        })}
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div className="form-group">
                         <label htmlFor="specialties">Specialties:  </label>
                         <input 
                             onChange={
@@ -150,7 +188,7 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="Share specialties here"
+                            placeholder="What do you specialize in within your field?"
                         />
                     </div>
                 </fieldset> 
@@ -169,7 +207,7 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="www.website.com"
+                            placeholder="www.yourwebsite.com"
                         />
                     </div>
                 </fieldset>  
@@ -188,7 +226,7 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="email@email.com"
+                            value={userProfile.email}
                         />
                     </div>
                 </fieldset>
@@ -204,33 +242,12 @@ export const ProfileForm = () => {
                                 updateProfile(copy)
                             }
                         }
-                        type="checkbox" />
+                        type="checkbox"
+                        value={userProfile.takingClients} />
                 </div>
             </fieldset>
 
-            <fieldset>
-                        {serviceLocations.map(
-                            (serviceLocation)=> (
-                                
-                    <div className="form-group">
-                        <label htmlFor="serviceLocation">How do you meet with clients? </label>
-                                <input 
-                                    onChange={
-                                        (evt) => {
-                                            const copy = {...userProfile}
-                                            copy.serviceLocationId = evt.target.value
-                                            updateProfile(copy)
-                                        }
-                                    }
-                                    required autoFocus
-                                    type="radio"
-                                    className="form-control"
-                                    value={serviceLocation.id}
-                                />
-                    </div>
-                            )
-                        )}
-                </fieldset>
+            
 
             <fieldset>
                     <div className="form-group">
@@ -266,15 +283,15 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="What would you like to share about your background and approach to coaching?"
+                            placeholder = "What would you like people to know about your coaching style and history?"
                         />
                     </div>
                 </fieldset>
 
-                <button className="btn btn-primary">
-                Update your Profile
-            </button>
+                <button onClick={submitProfile}className="btn btn-primary">
+                    Update your Profile
+                </button>
             </form>
-        </>
     )
 }
+

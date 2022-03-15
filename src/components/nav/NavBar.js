@@ -9,7 +9,7 @@ export const NavBar = (props) => {
                 <Link className="navbar__link" to="/">Home</Link>
             </li>
              <li className="navbar__item">
-                <Link className="navbar__link" to="/myProfile">My Profile</Link>
+                <Link className="navbar__link" to= {`/myProfile/${parseInt(localStorage.getItem("in_my_lane_coach"))}`}>My Profile</Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/connect">Connect</Link>

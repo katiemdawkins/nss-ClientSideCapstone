@@ -34,3 +34,8 @@ export const DeleteEvent = (id) => {
         method: "DELETE"
     })
 }
+
+// export const getCurrentEvent = (id) => {
+//     return fetch (`http://localhost:8088/events/${id}`)
+//     .then (res => res.json())
+// }

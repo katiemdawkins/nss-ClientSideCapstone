@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { getAllEventTypes } from "../ApiManager";
+import React, { useState, useEffect} from "react"
+import { useHistory, useParams } from "react-router"
+import { getAllEventTypes, getCurrentEvent } from "../ApiManager";
 
-
-export const CreateEvent = () =>{
-    //create a useState variable to hold transient state object
-    const [ newEvent, updateNewEvent ] = useState({
-        userId: 1,
-        name: "",
-        eventTypeId: 1,
-        location: "",
-        date: "",
-        details: ""
-    })
+//create a function to edit events
+export const EditEvent = () => {
+    const [ event, setEvent ] = useState({})
     const[ eventTypes, setEventTypes ]= useState([])
 
+    const { eventId } = useParams()
     const history = useHistory()
-    
-    //import eventTypes
+
+//fetch individual event
+useEffect(
+    () => {
+        return fetch(`http://localhost:8088/events/${eventId}?_expand=eventType&_expand=user`)
+        .then(res => res.json())
+        .then((evtData)=>{
+            setEvent(evtData)
+        })
+    },
+    [eventId]
+)
+
     useEffect(
         ()=>{
             getAllEventTypes()
@@ -28,38 +32,29 @@ export const CreateEvent = () =>{
         []
     )
 
-    //create a function that submits the new event 
-    //and saves the new event object and posts to the api
-    //push to /eventsCourses 
-
-    const submitNewEvent = (evt) => {
+    // function to edit - PUT
+    const editCurrentEvent = (evt) => {
         evt.preventDefault()
-
-        const newEventObj = {
-            userId: parseInt(localStorage.getItem("in_my_lane_coach")),
-            name: newEvent.name,
-            eventTypeId: parseInt(newEvent.eventTypeId),
-            location: newEvent.location,
-            date: newEvent.date,
-            details: newEvent.details
-        }
         
-        const fetchOption = {
-            method: "POST",
-            headers: {
+        const edittedEventObj = {
+            userId: parseInt(localStorage.getItem("in_my_lane_coach")),
+            name: event.name,
+            eventTypeId: parseInt(event.eventTypeId),
+            location: event.location,
+            date: event.date,
+            details: event.details
+        }
+        return fetch(`http://localhost:8088/events/${eventId}`, {
+            method: "PUT",
+            headers:{
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(newEventObj)
-        }
-        return fetch("http://localhost:8088/events", fetchOption)
-        .then(() =>{
-            history.push("/eventsCourses")
+            body: JSON.stringify(edittedEventObj)
         })
+        .then(()=> history.push("/eventsCourses"))
     }
 
 
-
-    //return the form 
     return(
         <form className="ticketForm">
             <h2 className="ticketForm__title">Create a New Event or Course</h2>
@@ -69,15 +64,15 @@ export const CreateEvent = () =>{
                     <input
                         onChange={
                             (evt) => {
-                                const copy = {...newEvent}
-                                copy.name=evt.target.value
-                                updateNewEvent(copy)
+                                const copy = {...event}
+                                copy.name = evt.target.value
+                                setEvent(copy)
                             }
                         }
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Enter your event or course name here"
+                        value= {event.name}
                             />
                 </div>
             </fieldset>
@@ -88,15 +83,16 @@ export const CreateEvent = () =>{
                              <select
                                 onChange={
                                     (evt) => {
-                                    const copy = {...newEvent}
-                                    copy.eventTypeId = evt.target.value
-                                    updateNewEvent(copy)
-                                    }
+                                        const copy = {...event}
+                                        copy.eventTypeId = evt.target.value
+                                        setEvent(copy)
+                                        }
                                 }
                                 required autoFocus
                                 className="form-control"
-                                placeholder="Select your event type">
-                               <option value="0">Choose your event type...</option>
+                                value= {event.eventTypeId}
+                                >
+                                
                                 {
                                 eventTypes.map((eventType) =>{
                                 return <option value={eventType.id} key={eventType.id}>{eventType.name}</option>
@@ -111,15 +107,15 @@ export const CreateEvent = () =>{
                     <input 
                         onChange={
                             (evt) =>{
-                                const copy = {...newEvent}
+                                const copy = {...event}
                                 copy.location = evt.target.value
-                                updateNewEvent(copy)
+                                setEvent(copy)
                             }
                         }
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Enter the location of your event here." />
+                        value={event.location} />
                 </div>
             </fieldset>
 
@@ -129,15 +125,15 @@ export const CreateEvent = () =>{
                     <textarea 
                         onChange={
                             (evt) =>{
-                                const copy = {...newEvent}
+                                const copy = {...event}
                                 copy.date = evt.target.value
-                                updateNewEvent(copy)
+                                setEvent(copy)
                             }
                         }
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Enter the date and time of your event here. Hosting a course? List relevant dates, or sign up dates here." />
+                        value={event.date} />
                 </div>
             </fieldset>
 
@@ -145,21 +141,19 @@ export const CreateEvent = () =>{
                 <div className="form-group">
                     <label htmlFor="details">Tell the people what they need to know about your event or course:</label>
                     <textarea 
-                        onChange={
-                            (evt) =>{
-                                const copy = {...newEvent}
-                                copy.details = evt.target.value
-                                updateNewEvent(copy)
-                            }
-                        }
+                        onChange={ (evt) =>{
+                            const copy = {...event}
+                            copy.details = evt.target.value
+                            setEvent(copy)
+                        }}
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Give us a brief description of your event or course. Who is it for? what will it cover?" />
+                        value={event.details} />
                 </div>
             </fieldset>
 
-            <button onClick={submitNewEvent}className="btn btn-primary">
+            <button onClick={editCurrentEvent}className="btn btn-primary">
                 Publish Event
             </button>
         </form>

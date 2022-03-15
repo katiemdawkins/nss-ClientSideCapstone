@@ -1,11 +1,12 @@
 import React, { useState, useEffect} from "react"
-import { useHistory } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { DeleteEvent, getAllEvents, getAllEventTypes, getAllUsers } from "../ApiManager"
 import "./Events.css"
 
 export const DisplayEvents = () => {
     const [ events, setEvents] = useState([])
     const history = useHistory()
+    const { eventId } = useParams()
 
 
     const eventsState = () => {
@@ -31,8 +32,10 @@ export const DisplayEvents = () => {
             eventsState(eventData)
         })
     }
+   
 
    
+
     return(
         <>
             <h2>Events and Courses</h2>
@@ -53,6 +56,9 @@ export const DisplayEvents = () => {
                             <button onClick={()=>{
                                 deleteMyEvent(event.id)
                             }}>Delete Event</button>
+                             <button onClick={()=>{
+                                history.push(`/eventsCourses/edit/${event.id}`)
+                            }}>Edit Event</button>
                         </div>
                         } else {
                             return <div className="eventCourse" key={`event--${event.id}`}>
