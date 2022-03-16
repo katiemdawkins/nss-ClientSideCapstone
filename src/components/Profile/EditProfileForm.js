@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom"
-import { getAllCoachTypes, getAllServiceLocations, getAllUsers } from "../ApiManager";
+import { DeleteCoachLocationObj, getAllCoachTypes, getAllServiceLocations, getAllUsers, getCoachLocations } from "../ApiManager";
 import "./ProfileForm.css"
 
 ///create a new userProfile 
@@ -13,7 +13,7 @@ export const EditProfileForm = () => {
             specialties: "",
             website: "",
             email: "",
-            takingClients: "",
+            takingClients: false,
             bio: "",
             location: ""
     })
@@ -21,6 +21,7 @@ export const EditProfileForm = () => {
     const [ selectedServiceLocations, setSelectLocations ] = useState( new Set())
     const [ coachTypes, setCoachTypes] = useState([])
     const [ serviceLocations, setServiceLocations ] = useState([])
+    const [ coachLocationObjects, setCoachLocationObjects ] = useState([])
 
     const history = useHistory()
     const { userId } = useParams()
@@ -55,20 +56,50 @@ export const EditProfileForm = () => {
         },
         []
     )
+   
+    //get location object for current user
+    // useEffect(
+    //     () =>{
+    //         return fetch (`http://localhost:8088/coachLocations/${userId}`)
+    //         .then(res => res.json())
+    //         .then ((data)=>{
+    //             setCoachLocationObjects(data)
+    //         })
+    //     },
+    //     [userId]
+    // )
 
     //create function to submit new profile
     const submitProfile =(evt) => {
         evt.preventDefault()
+        
+        const locationObjects = () => {
+            return fetch(`http://localhost:8088/coachLocations?userId=${userId}`)
+            .then(res => res.json())
+            .then((data)=>{
+                
+                setCoachLocationObjects(data)
+                data.forEach(locationObj =>{
+                
+                    DeleteCoachLocationObj(locationObj.id)
+                })
+            })
+        }
 
+        locationObjects()
         //step 1 interate the set of service locations
             //do a post operation to coachLocations for each item in that set (if they click 1 box, 1 Post happens)
         selectedServiceLocations.forEach(serviceLocation => {
+            
+            //step 1 get all objects for current user from json server
+            //step 2 iterate the array
+            //step 3  delete each one 
 
             const coachLocationObj = {
                 userId: parseInt(localStorage.getItem("in_my_lane_coach")),
-                //it's not getting the service location id, that's coming back as null
                 serviceLocationId: serviceLocation
             }
+
             const fetchOption = {
                 method:"POST",
                 headers: {
@@ -77,11 +108,9 @@ export const EditProfileForm = () => {
                 body: JSON.stringify(coachLocationObj)
             }
             return fetch ("http://localhost:8088/coachLocations", fetchOption)
-            .then((data)=>{
-                setSelectLocations(data)
-            })
+            
         })
-        //step 2 PUT to user profile for all other input fields - get rid of the serviceLocationId
+        //step 2 PUT to user profile for all other input fields  get rid of the serviceLocationId
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
             coachTypeId: parseInt(currentUserProfile.coachTypeId),

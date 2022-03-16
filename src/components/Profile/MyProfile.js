@@ -31,7 +31,7 @@ export const MyProfile = () => {
     //get userProfiles
     useEffect (
         ()=>{
-           return fetch (`http://localhost:8088/userProfiles/${userId}?_expand=event&_expand=coachType`)
+           return fetch (`http://localhost:8088/userProfiles/${userId}?_expand=coachType`)
            .then(res => res.json())
            .then((data)=>{
                setProfile(data)
@@ -62,12 +62,6 @@ export const MyProfile = () => {
     )
     
 
-
-
-    //return
-    //hi user.first name 
-    //create your profile here button
-    //or view/edit your profile here button
 
     return (
         <>

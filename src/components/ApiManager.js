@@ -24,7 +24,12 @@ export const getAllEvents = () => {
     .then(res => res.json())
 }
 export const getAllUserProfiles = () => {
-    return fetch("http://localhost:8088/userProfiles?_expand=event&_expand=coachType")
+    return fetch("http://localhost:8088/userProfiles?_expand=coachType")
+    .then(res => res.json())
+}
+
+export const getCoachLocations = () => {
+    return fetch("http://localhost:8088/coachLocations")
     .then(res => res.json())
 }
 
@@ -32,6 +37,12 @@ export const getAllUserProfiles = () => {
 export const DeleteEvent = (id) => {
     return fetch(`http://localhost:8088/events/${id}`, {
         method: "DELETE"
+    })
+}
+
+export const DeleteCoachLocationObj = (id) =>{
+    return fetch(`http://localhost:8088/coachLocations/${id}`,{
+    method: "DELETE"
     })
 }
 

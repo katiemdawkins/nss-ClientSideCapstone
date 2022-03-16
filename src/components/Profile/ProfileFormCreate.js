@@ -13,7 +13,7 @@ export const ProfileForm = () => {
             specialties: "",
             website: "",
             email: "",
-            takingClients: "",
+            takingClients: false,
             bio: "",
             location: ""
     })
