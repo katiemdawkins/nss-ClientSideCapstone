@@ -57,22 +57,15 @@ export const EditProfileForm = () => {
         []
     )
    
-    //get location object for current user
-    // useEffect(
-    //     () =>{
-    //         return fetch (`http://localhost:8088/coachLocations/${userId}`)
-    //         .then(res => res.json())
-    //         .then ((data)=>{
-    //             setCoachLocationObjects(data)
-    //         })
-    //     },
-    //     [userId]
-    // )
+  
 
     //create function to submit new profile
     const submitProfile =(evt) => {
         evt.preventDefault()
         
+        //step 1 get all objects for current user from json server
+        //step 2 iterate the array
+        //step 3  delete each one 
         const locationObjects = () => {
             return fetch(`http://localhost:8088/coachLocations?userId=${userId}`)
             .then(res => res.json())
@@ -87,13 +80,11 @@ export const EditProfileForm = () => {
         }
 
         locationObjects()
+        
         //step 1 interate the set of service locations
             //do a post operation to coachLocations for each item in that set (if they click 1 box, 1 Post happens)
         selectedServiceLocations.forEach(serviceLocation => {
             
-            //step 1 get all objects for current user from json server
-            //step 2 iterate the array
-            //step 3  delete each one 
 
             const coachLocationObj = {
                 userId: parseInt(localStorage.getItem("in_my_lane_coach")),

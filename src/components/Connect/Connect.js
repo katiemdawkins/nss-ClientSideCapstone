@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from "react"
-import { getAllUserProfiles} from "../ApiManager"
+import { getAllUserProfiles, getCoachLocations} from "../ApiManager"
 import "./connect.css"
 
 export const MiniProfiles = () => {
     const [ userProfiles, setUserProfiles] = useState([])
+    const [ coachLocations, setCoachLocations ] = useState([])
 
 
     const userProfileState = () => {
@@ -22,6 +23,17 @@ export const MiniProfiles = () => {
         []
     )
 
+    useEffect (
+        ()=>{
+            return fetch ("http://localhost:8088/coachLocations?_expand=serviceLocation")
+            .then(res => res.json())
+            .then((data)=>{
+                setCoachLocations(data)
+            })
+        },
+        []
+    )
+
 
 
 
@@ -35,6 +47,16 @@ export const MiniProfiles = () => {
                             <h3>{userProfile.coachType.name}</h3>
                             <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
                             <p>{userProfile.location}</p>
+                            <p className="bolder">Services Clients: </p>
+                            {
+                                coachLocations.map(
+                                    (coachLocation)=>{
+                                    if (coachLocation.userId === userProfile.userId){
+                                        return <p>{coachLocation.serviceLocation.name}</p>
+                                        }
+                                    }
+                                )
+                            }
                     </div>
                     }
                     )
@@ -43,5 +65,3 @@ export const MiniProfiles = () => {
         </>
     )
 }
-
-{/* <p>Works with clients: {userProfile.serviceLocation.name}</p> */}
