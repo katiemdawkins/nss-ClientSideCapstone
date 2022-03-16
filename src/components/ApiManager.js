@@ -24,7 +24,7 @@ export const getAllEvents = () => {
     .then(res => res.json())
 }
 export const getAllUserProfiles = () => {
-    return fetch("http://localhost:8088/userProfiles?_expand=event&_expand=coachType&_expand=serviceLocation")
+    return fetch("http://localhost:8088/userProfiles?_expand=event&_expand=coachType")
     .then(res => res.json())
 }
 

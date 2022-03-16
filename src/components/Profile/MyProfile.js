@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
-import { getAllUserProfiles, getAllUsers } from "../ApiManager"
+import { getAllEvents, getAllUserProfiles, getAllUsers } from "../ApiManager"
 import { UserProfile } from "./UsersProfile"
 
 //create a function that takes a user to their profile
@@ -11,6 +11,8 @@ export const MyProfile = () => {
 //get current user object? 
     const [ users, setUsers ] = useState([])
     const [ userProfile, setProfile ] = useState({})
+    const [ currentCoachLocations, setCurrentCoachLocations ] = useState([])
+    const [ events, setEvents ] = useState([])
     
     const history = useHistory()
     const { userId } = useParams()
@@ -18,16 +20,18 @@ export const MyProfile = () => {
     //fetch current user
     useEffect(
         () =>{
-            getAllUsers()
-            .then ((userData)=>{
-                setUsers(userData)
+            return fetch(`http://localhost:8088/users`)
+            .then(res => res.json())
+            .then((data)=>{
+                setUsers(data)
             })
         },
         []
     )
+    //get userProfiles
     useEffect (
         ()=>{
-           return fetch (`http://localhost:8088/userProfiles/${userId}?_expand=event&_expand=coachType&_expand=serviceLocation`)
+           return fetch (`http://localhost:8088/userProfiles/${userId}?_expand=event&_expand=coachType`)
            .then(res => res.json())
            .then((data)=>{
                setProfile(data)
@@ -35,6 +39,28 @@ export const MyProfile = () => {
         },
         [userId]
     )
+    //fetch coachlocations state
+    useEffect(
+        () =>{
+            return fetch (`http://localhost:8088/coachLocations?_expand=serviceLocation`)
+            .then(res => res.json())
+            .then ((data)=>{
+                setCurrentCoachLocations(data)
+            })
+        },
+        []
+    )
+
+    useEffect(
+        ()=>{
+            getAllEvents()
+            .then((data)=>{
+                setEvents(data)
+            })
+        },
+        []
+    )
+    
 
 
 
@@ -47,16 +73,16 @@ export const MyProfile = () => {
         <>
         {
             users.map(
-                (user) =>{
-                    if(user.id === parseInt(localStorage.getItem("in_my_lane_coach"))){
-                    return <div key={`user--${user.id}`}>
-                        <h2>Welcome to your profile page, {user.firstName}</h2>
-                        <button className = "btn" onClick={() => history.push(`/myProfile/create/${parseInt(localStorage.getItem("in_my_lane_coach"))}`)}>Edit Your Profile</button>
-                    </div>
-                    }
+                (user)=>{
+                    if(user.id === parseInt(localStorage.getItem("in_my_lane_coach")) && user.id != userProfile.userId){
+                        return <div key={`user--${user.id}`}>
+                                <h2>Welcome to your profile page, {user.firstName}</h2>
+                                <button className = "btn" onClick={() => history.push(`/myProfile/create/${parseInt(localStorage.getItem("in_my_lane_coach"))}`)}>Create Your Profile</button> 
+                        </div>
+                    } 
                 }
-
-                )
+            )
+                    
         }
         {
            <div className="profileInfo" key={`user--${userProfile?.id}`}>
@@ -66,23 +92,41 @@ export const MyProfile = () => {
                     <p>Website: {userProfile?.website}</p>
                     <p>Email: {userProfile?.email}</p>
                     <p>Taking NewClients: {userProfile?.takingClients? "Yes": "No"}</p>
-                    <p>Works with clients: {userProfile.serviceLocation?.name ? `In Person`: "-In Person" }
-                    {userProfile.serviceLocation?.name ? `Live Video`: " -Live Video" }
-                    {userProfile.serviceLocation?.name ? `Remote Online`: " -Remote Online" }</p>
+                    {
+                        currentCoachLocations.map(
+                            (currentCLocation)=>{
+                                if(currentCLocation.userId === parseInt(localStorage.getItem("in_my_lane_coach"))){
+                                    return <>
+                                    <p>Service Location: {currentCLocation.serviceLocation?.name}</p>
+                                    </>
+                                }
+                            }
+                        )
+                    }
                     <p>Location: {userProfile?.location}</p>
                     <p>Bio: {userProfile?.bio}</p>
-                    <p>Events + Courses: {userProfile.event?.name}</p>
+                    {
+                        events.map(
+                            (event)=>{
+                                if(event.userId === userProfile.userId){
+                                    return <p>Events + Courses: {event.name}</p>
+                                }
+                            }
+                        )
+                    }
+                    
+                    {
+                        users.map(
+                            (user)=>{
+                                if(user.id === userProfile.userId){
+                                    return <button className = "btn" onClick={() => history.push(`/myProfile/edit/${parseInt(localStorage.getItem("in_my_lane_coach"))}`)}>Edit Your Profile</button>
+                                }
+                            }
+                        )
+                    }
+                    
            </div>
-        }
+        }       
         </>
     )
 }
-// {
-//     userProfiles.map(
-//         (userP)=>{
-//             if(userP.userId === parseInt(localStorage.getItem("in_my_lane_coach"))){
-//                 return <button>View Profile</button>
-//             }
-//         }
-//     )
-// }

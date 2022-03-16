@@ -5,6 +5,7 @@ import { CreateEvent } from "./Events/CreateEvent"
 import { EditEvent } from "./Events/EditEvent"
 import { DisplayEvents } from "./Events/Events"
 import { HomePage } from "./home/Home"
+import { EditProfileForm } from "./Profile/EditProfileForm"
 import { MyProfile } from "./Profile/MyProfile"
 import { ProfileForm } from "./Profile/ProfileFormCreate"
 
@@ -22,6 +23,9 @@ export const ApplicationViews = () => {
             <Route exact path="/myProfile/create/:userId(\d+)">
                 <ProfileForm />
             </Route>
+            <Route exact path="/myProfile/edit/:userId(\d+)">
+                <EditProfileForm />
+            </Route>
             <Route path="/connect">
                 <MiniProfiles />
             </Route>
@@ -37,10 +41,3 @@ export const ApplicationViews = () => {
         </>
     )
 }
-
-            // <Route exact path="/myProfile/create/:userId(\d+)">
-            //     <ProfileForm />
-            // </Route>
-{/* <Route exact path="/myProfile/:userId(\d+)">
-<UsersProfile />
-</Route> */}

@@ -8,7 +8,6 @@ export const ProfileForm = () => {
     const [ userProfile, updateProfile ] = useState({
             userId: 1,
             coachTypeId: 1,
-            serviceLocationId: 1,
             firstName: "",
             lastName: "",
             specialties: "",
@@ -16,10 +15,10 @@ export const ProfileForm = () => {
             email: "",
             takingClients: "",
             bio: "",
-            location: "",
-            eventId: 1
+            location: ""
     })
     const [ coachTypes, setCoachTypes] = useState([])
+    const [ selectedServiceLocations, setSelectLocations ] = useState( new Set())
     const [ serviceLocations, setServiceLocations ] = useState([])
 
     const history = useHistory()
@@ -60,10 +59,28 @@ export const ProfileForm = () => {
     const submitProfile =(evt) => {
         evt.preventDefault()
 
+        selectedServiceLocations.forEach(serviceLocation => {
+
+            const coachLocationObj = {
+                userId: parseInt(localStorage.getItem("in_my_lane_coach")),
+                serviceLocationId: serviceLocation
+            }
+            const fetchOption = {
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(coachLocationObj)
+            }
+            return fetch ("http://localhost:8088/coachLocations", fetchOption)
+            .then((data)=>{
+                setSelectLocations(data)
+            })
+        })
+
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
             coachTypeId: parseInt(userProfile.coachTypeId),
-            serviceLocationId: parseInt(userProfile.serviceLocationId),
             firstName: userProfile.firstName,
             lastName: userProfile.lastName,
             specialties: userProfile.specialties,
@@ -71,18 +88,17 @@ export const ProfileForm = () => {
             email: userProfile.email,
             takingClients: userProfile.takingClients,
             bio: userProfile.bio,
-            location: userProfile.location,
-            eventId: 3
+            location: userProfile.location
         }
 
-        return fetch(`http://localhost:8088/userProfiles/${userId}`,{
-            method: "PUT",
+        const fetchOption ={
+            method: "POST",
             headers:{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newProfile)
-
-        })
+        }
+        return fetch("http://localhost:8088/userProfiles", fetchOption)
         .then (()=>{
             history.push(`/myProfile/${parseInt(localStorage.getItem("in_my_lane_coach"))}`)
         })
@@ -105,7 +121,6 @@ export const ProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            placeholder="Enter your first name"
                             value= {userProfile.firstName}
                         />
                     </div>
@@ -159,15 +174,19 @@ export const ProfileForm = () => {
                             <input 
                                 onChange={
                                     (evt) => {
-                                        const copy = {...userProfile}
-                                        copy.serviceLocationId = evt.target.checked
-                                        updateProfile(copy)
+                                        const copy = new Set(selectedServiceLocations)
+                                        if(copy.has(serviceLocation.id)){
+                                            copy.delete(serviceLocation.id)
+                                        }else{
+                                            copy.add(serviceLocation.id)
+                                        }
+                                        setSelectLocations(copy)
                                     }
                                 }
                                 required autoFocus
                                 type="checkbox"
                                 className="form-control"
-                                value={userProfile.serviceLocationId.name}/>
+                                />
                             {serviceLocation.name}
                             </>
                         })}
@@ -243,7 +262,7 @@ export const ProfileForm = () => {
                             }
                         }
                         type="checkbox"
-                        value={userProfile.takingClients} />
+                         />
                 </div>
             </fieldset>
 
