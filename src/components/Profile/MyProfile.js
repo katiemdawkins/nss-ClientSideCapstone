@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
 import { getAllEvents, getAllUserProfiles, getAllUsers } from "../ApiManager"
 import { UserProfile } from "./UsersProfile"
+import "./MyProfile.css"
 
 //create a function that takes a user to their profile
 //if the user is already in the database with userProfile it will show edit/view profile button
@@ -80,18 +81,19 @@ export const MyProfile = () => {
         }
         {
            <div className="profileInfo" key={`user--${userProfile?.id}`}>
-                 <h2>{userProfile?.firstName} {userProfile?.lastName}</h2>
-                    <h3>{userProfile.coachType?.name}</h3>
+                 <h2 className="profileName">{userProfile?.firstName} {userProfile?.lastName}</h2>
+                    <h3 className="profileType">{userProfile.coachType?.name}</h3>
                     <p>Specialties: {userProfile?.specialties}</p>
                     <p>Website: {userProfile?.website}</p>
                     <p>Email: {userProfile?.email}</p>
                     <p>Taking NewClients: {userProfile?.takingClients? "Yes": "No"}</p>
+                    <p className="bolder">Service Location: </p>
                     {
                         currentCoachLocations.map(
                             (currentCLocation)=>{
-                                if(currentCLocation.userId === parseInt(localStorage.getItem("in_my_lane_coach"))){
+                                if(currentCLocation.userId === userProfile.userId){
                                     return <>
-                                    <p>Service Location: {currentCLocation.serviceLocation?.name}</p>
+                                    <p>{currentCLocation.serviceLocation?.name}</p>
                                     </>
                                 }
                             }

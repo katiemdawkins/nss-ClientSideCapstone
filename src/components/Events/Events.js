@@ -68,7 +68,6 @@ export const DisplayEvents = () => {
                             <p>{event.location}</p>
                             <p>{event.date}</p>
                             <p>{event.details}</p>
-                            <button>Save Event</button>
                             </div>
                         }
                     }

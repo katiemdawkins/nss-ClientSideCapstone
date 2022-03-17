@@ -8,6 +8,7 @@ import { HomePage } from "./home/Home"
 import { EditProfileForm } from "./Profile/EditProfileForm"
 import { MyProfile } from "./Profile/MyProfile"
 import { ProfileForm } from "./Profile/ProfileFormCreate"
+import { ViewProfile } from "./Profile/ViewProfile"
 
 
 
@@ -26,8 +27,11 @@ export const ApplicationViews = () => {
             <Route exact path="/myProfile/edit/:userId(\d+)">
                 <EditProfileForm />
             </Route>
-            <Route path="/connect">
+            <Route exact path="/connect">
                 <MiniProfiles />
+            </Route>
+            <Route exact path="/connect/:userId(\d+)">
+                <ViewProfile />
             </Route>
             <Route exact path="/eventsCourses">
                 <DisplayEvents />

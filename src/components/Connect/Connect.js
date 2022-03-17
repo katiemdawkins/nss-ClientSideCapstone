@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { getAllUserProfiles, getCoachLocations} from "../ApiManager"
+import { Link } from "react-router-dom"
 import "./connect.css"
 
 export const MiniProfiles = () => {
@@ -43,7 +44,7 @@ export const MiniProfiles = () => {
             userProfiles.map(
                 (userProfile) => {
                     return <div className="profileInfo" key={`user--${userProfile.id}`}>
-                            <h2>{userProfile.firstName} {userProfile.lastName}</h2>
+                            <h2><Link to={`/connect/${userProfile.userId}`}>{userProfile.firstName} {userProfile.lastName}</Link></h2>
                             <h3>{userProfile.coachType.name}</h3>
                             <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
                             <p>{userProfile.location}</p>
