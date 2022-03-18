@@ -1,4 +1,5 @@
 .profileInfo {
-    border: solid 1em blue;
+    border: solid 2px #00ada5;
     padding: 1em;
+    margin: 3em;
 }

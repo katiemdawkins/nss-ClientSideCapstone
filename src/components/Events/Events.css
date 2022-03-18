@@ -1,6 +1,36 @@
 .eventCourse {
-    border: solid rgb(33, 197, 197) 1px;
-    padding: 1em;
+    display:flex;
+    flex-direction: column;
+    border: 2px solid #00ada5;
     margin: 1em;
+    padding: 1em;
+}
+.title{
+    color: #013d39;
+    text-align: center;
+
+}
+
+button {
+  background-color: #00ada5; 
+  border: none;
+  color: #ffffff;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+}
+
+button:hover {
+    background-color: #013d39; 
+    color: #ffffff;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+.buttons{
+    display:flex;
+    display: row;
 }
 

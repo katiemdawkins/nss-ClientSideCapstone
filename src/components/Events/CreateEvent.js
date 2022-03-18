@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getAllEventTypes } from "../ApiManager";
+import { getAllEventTopics, getAllEventTypes } from "../ApiManager";
 
 
 export const CreateEvent = () =>{
@@ -14,6 +14,7 @@ export const CreateEvent = () =>{
         details: ""
     })
     const[ eventTypes, setEventTypes ]= useState([])
+    const [ eventTopics, setEventTopics ] = useState([])
 
     const history = useHistory()
     
@@ -23,6 +24,16 @@ export const CreateEvent = () =>{
             getAllEventTypes()
             .then((eTypes)=>{
                 setEventTypes(eTypes)
+            })
+        },
+        []
+    )
+
+    useEffect(
+        ()=>{
+            getAllEventTopics()
+            .then((data)=>{
+                setEventTopics(data)
             })
         },
         []
@@ -39,6 +50,7 @@ export const CreateEvent = () =>{
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
             name: newEvent.name,
             eventTypeId: parseInt(newEvent.eventTypeId),
+            eventTopicId: parseInt(newEvent.eventTopicId),
             location: newEvent.location,
             date: newEvent.date,
             details: newEvent.details
@@ -100,6 +112,28 @@ export const CreateEvent = () =>{
                                 {
                                 eventTypes.map((eventType) =>{
                                 return <option value={eventType.id} key={eventType.id}>{eventType.name}</option>
+                                })}
+                            </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="eventTopicId">What's the topic of your event? </label>
+                             <select
+                                onChange={
+                                    (evt) => {
+                                    const copy = {...newEvent}
+                                    copy.eventTopicId = evt.target.value
+                                    updateNewEvent(copy)
+                                    }
+                                }
+                                required autoFocus
+                                className="form-control"
+                                placeholder="Select your event topic...">
+                               <option value="0">Choose your event topic...</option>
+                                {
+                                eventTopics.map((eventTopic) =>{
+                                return <option value={eventTopic.id} key={eventTopic.id}>{eventTopic.name}</option>
                                 })}
                             </select>
                     </div>

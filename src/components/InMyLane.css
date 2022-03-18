@@ -1,0 +1,15 @@
+body {
+    background-color: #ffffff;
+
+}
+
+.homeContent{
+    border: 2px solid #00ada5;
+    padding: 2em;
+    margin: 3em;
+    color: #888888;
+}
+
+.homeHeader{
+    color: #013639;
+}

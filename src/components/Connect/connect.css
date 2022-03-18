@@ -1,3 +1,29 @@
+
 .bolder {
     font-weight: bold;
 }
+
+.connectProfileInfo {
+ display:flex;
+ flex-direction: column;
+ border: 2px solid #00ada5;
+ margin: 1em;
+ padding: 1em;
+}
+
+
+link {
+    color: #013d39;
+    text-decoration: none;
+}
+
+input {
+    border: solid 1px #888888;
+    width: 40%;
+    margin-left: 3em;
+    padding: 1em;
+    border-radius: 4px;
+    outline: #00ada5;
+}
+
+
