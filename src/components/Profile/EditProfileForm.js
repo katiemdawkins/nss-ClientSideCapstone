@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom"
 import { DeleteCoachLocationObj, getAllCoachTypes, getAllServiceLocations, getAllUsers, getCoachLocations } from "../ApiManager";
 import "./ProfileForm.css"
+import UploadImages from "./UpLoadImg";
 
 ///create a new userProfile 
 export const EditProfileForm = () => {
     const [ currentUserProfile, updateCurrentUserProfile ] = useState({
             userId: 1,
             coachTypeId: 1,
+            imageURL:"",
             firstName: "",
             lastName: "",
             specialties: "",
@@ -105,6 +107,7 @@ export const EditProfileForm = () => {
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
             coachTypeId: parseInt(currentUserProfile.coachTypeId),
+            imageURL: currentUserProfile.imageURL,
             firstName: currentUserProfile.firstName,
             lastName: currentUserProfile.lastName,
             specialties: currentUserProfile.specialties,
@@ -133,26 +136,26 @@ export const EditProfileForm = () => {
                 <h2 className= "profileFormTitle">Edit Your Profile</h2>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="firstName">First Name:  </label>
-                        <input 
-                            onChange={
-                                (evt) => {
-                                    const copy = {...currentUserProfile}
-                                    copy.firstName = evt.target.value
-                                    updateCurrentUserProfile(copy)
+                        <label htmlFor="firstName">First Name:</label>
+                            <input 
+                                onChange={
+                                    (evt) => {
+                                        const copy = {...currentUserProfile}
+                                        copy.firstName = evt.target.value
+                                        updateCurrentUserProfile(copy)
+                                    }
                                 }
-                            }
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter your first name"
-                            value= {currentUserProfile.firstName}
-                        />
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your first name"
+                                value={currentUserProfile.firstName}
+                            />
                     </div>
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last Name:  </label>
+                        <label htmlFor="lastName">Last Name:</label>
                         <input 
                             onChange={
                                 (evt) => {
@@ -164,14 +167,14 @@ export const EditProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
-                            value= {currentUserProfile.lastName}
+                            value={currentUserProfile.lastName}
                         />
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="coachType">Coach Type: </label>
+                        <label htmlFor="coachType">Coach Type:</label>
                              <select
                                 onChange={
                                     (evt) => {
@@ -193,7 +196,13 @@ export const EditProfileForm = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="serviceLocations">Services Clients:  </label>
+                      <UploadImages obj={currentUserProfile} update ={updateCurrentUserProfile} />
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="serviceLocations">Services Clients:</label>
                         {serviceLocations.map((serviceLocation) => {
                             return <>
                             <input 

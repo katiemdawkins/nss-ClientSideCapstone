@@ -1,3 +1,17 @@
 .bolder {
     font-weight: bold;
 }
+
+img{
+    width:40%;
+    height:100%;
+}
+
+.bigInfo {
+    display: flex;
+    flex-direction: row;
+    border:2px solid #888888;
+    justify-content: space-evenly;
+}
+
+

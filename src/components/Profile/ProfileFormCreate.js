@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom"
 import { getAllCoachTypes, getAllServiceLocations, getAllUsers } from "../ApiManager";
 import "./ProfileForm.css"
+import UploadImages from "./UpLoadImg";
 
 ///create a new userProfile 
 export const ProfileForm = () => {
     const [ userProfile, updateProfile ] = useState({
             userId: 1,
+            imageURL: "",
             coachTypeId: 1,
             firstName: "",
             lastName: "",
@@ -80,6 +82,7 @@ export const ProfileForm = () => {
 
         const newProfile = {
             userId: parseInt(localStorage.getItem("in_my_lane_coach")),
+            imageURL: userProfile.imageURL,
             coachTypeId: parseInt(userProfile.coachTypeId),
             firstName: userProfile.firstName,
             lastName: userProfile.lastName,
@@ -109,7 +112,7 @@ export const ProfileForm = () => {
                 <h2 className= "profileFormTitle">Create Your Profile</h2>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="firstName">First Name:  </label>
+                        <label htmlFor="firstName">First Name:</label>
                         <input 
                             onChange={
                                 (evt) => {
@@ -127,26 +130,26 @@ export const ProfileForm = () => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last Name:  </label>
-                        <input 
-                            onChange={
-                                (evt) => {
-                                    const copy = {...userProfile}
-                                    copy.lastName = evt.target.value
-                                    updateProfile(copy)
+                        <label htmlFor="lastName">Last Name:</label>
+                            <input 
+                                onChange={
+                                    (evt) => {
+                                        const copy = {...userProfile}
+                                        copy.lastName = evt.target.value
+                                        updateProfile(copy)
+                                    }
                                 }
-                            }
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            value= {userProfile.lastName}
-                        />
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                value= {userProfile.lastName}
+                            />
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="coachType">Coach Type: </label>
+                        <label htmlFor="coachType">Coach Type:</label>
                              <select
                                 onChange={
                                     (evt) => {
@@ -163,6 +166,12 @@ export const ProfileForm = () => {
                                 return <option value={coachType.id} key={coachType.id}>{coachType.name}</option>
                                 })}
                             </select>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div className="form-group">
+                      <UploadImages obj={userProfile} update ={updateProfile} />
                     </div>
                 </fieldset>
 

@@ -43,6 +43,9 @@ fieldset {
 
 .container--login {
     text-align: center;
+    color: #00ada5;
+    border: 20px solid #013d39;
+    margin: 40px;
 }
 
 .form--login {
@@ -64,3 +67,4 @@ fieldset {
     min-width: 15rem;
     min-height: 5rem;
 }
+

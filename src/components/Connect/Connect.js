@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react"
 import { getAllUserProfiles, getCoachLocations} from "../ApiManager"
 import { Link } from "react-router-dom"
+import { Typography } from '@mui/material';
 import "./connect.css"
 
 export const MiniProfiles = () => {
@@ -54,7 +55,11 @@ export const MiniProfiles = () => {
                 }).map((userProfile, index)=>(
                     <div key={index} className="connectProfileInfo">
                         <div className="connectInside">
-                        <h2 className="linkToProfile"><Link to={`/connect/${userProfile.id}`}>{userProfile.firstName} {userProfile.lastName}</Link></h2>
+                        <h2 className="linkToProfile">
+                            <Link to={`/connect/${userProfile.id}`}>
+                                {userProfile.firstName} {userProfile.lastName}
+                            </Link>
+                        </h2>
                             <h3>{userProfile.coachType.name}</h3>
                             <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
                             <p>{userProfile.location}</p>
@@ -82,25 +87,3 @@ export const MiniProfiles = () => {
     )
 }
 
-        // {
-        //     userProfiles.map(
-        //         (userProfile) => {
-        //             return <div className="connectProfileInfo" key={`user--${userProfile.id}`}>
-        //                     <h2 className="linkToProfile"><Link to={`/connect/${userProfile.id}`}>{userProfile.firstName} {userProfile.lastName}</Link></h2>
-        //                     <h3>{userProfile.coachType.name}</h3>
-        //                     <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
-        //                     <p>{userProfile.location}</p>
-        //                     <p className="bolder">Services Clients: </p>
-        //                     {
-        //                         coachLocations.map(
-        //                             (coachLocation)=>{
-        //                             if (coachLocation.userId === userProfile.userId){
-        //                                 return <p>{coachLocation.serviceLocation.name}</p>
-        //                                 }
-        //                             }
-        //                         )
-        //                     }
-        //             </div>
-        //             }
-        //             )
-        //     }

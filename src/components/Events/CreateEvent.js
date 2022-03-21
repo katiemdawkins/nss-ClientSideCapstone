@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { getAllEventTopics, getAllEventTypes } from "../ApiManager";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import "./CreateEvent.css"
+import { MenuItem } from "@mui/material";
 
 
 export const CreateEvent = () =>{
@@ -9,6 +13,7 @@ export const CreateEvent = () =>{
         userId: 1,
         name: "",
         eventTypeId: 1,
+        eventTopicId: 1,
         location: "",
         date: "",
         details: ""
@@ -73,12 +78,18 @@ export const CreateEvent = () =>{
 
     //return the form 
     return(
-        <form className="ticketForm">
+        <Box className="ticketForm"
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '35ch' },
+                }}
+                noValidate
+                autoComplete="off"
+            >
             <h2 className="ticketForm__title">Create a New Event or Course</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="eventName">What's the name of your event?</label>
-                    <input
+                    <TextField
                         onChange={
                             (evt) => {
                                 const copy = {...newEvent}
@@ -86,18 +97,18 @@ export const CreateEvent = () =>{
                                 updateNewEvent(copy)
                             }
                         }
-                        required autoFocus
-                        type="text"
+                        required 
+                        id="outlined-required"
+                        label="What's the name of your event?"
                         className="form-control"
                         placeholder="Enter your event or course name here"
-                            />
+                        />
                 </div>
             </fieldset>
 
             <fieldset>
                     <div className="form-group">
-                        <label htmlFor="eventTypeId">What type of event are you hosting? </label>
-                             <select
+                             <TextField
                                 onChange={
                                     (evt) => {
                                     const copy = {...newEvent}
@@ -105,21 +116,24 @@ export const CreateEvent = () =>{
                                     updateNewEvent(copy)
                                     }
                                 }
-                                required autoFocus
+                                id="outlined-select-type"
+                                select
+                                label="What type of event are you hosting?"
+                                required
                                 className="form-control"
-                                placeholder="Select your event type">
-                               <option value="0">Choose your event type...</option>
-                                {
-                                eventTypes.map((eventType) =>{
-                                return <option value={eventType.id} key={eventType.id}>{eventType.name}</option>
-                                })}
-                            </select>
+                                >
+
+                                {eventTypes.map((eventType) =>(
+                                    <MenuItem value={eventType.id} key={eventType.id}>
+                                        {eventType.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                     </div>
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="eventTopicId">What's the topic of your event? </label>
-                             <select
+                             <TextField
                                 onChange={
                                     (evt) => {
                                     const copy = {...newEvent}
@@ -127,22 +141,24 @@ export const CreateEvent = () =>{
                                     updateNewEvent(copy)
                                     }
                                 }
-                                required autoFocus
+                                id="outlined-select-topic"
+                                select
+                                label="What's the topic of your event?"
+                                required
                                 className="form-control"
-                                placeholder="Select your event topic...">
-                               <option value="0">Choose your event topic...</option>
-                                {
-                                eventTopics.map((eventTopic) =>{
-                                return <option value={eventTopic.id} key={eventTopic.id}>{eventTopic.name}</option>
-                                })}
-                            </select>
+                            >
+                                {eventTopics.map((eventTopic) =>(
+                                    <MenuItem key ={eventTopic.id} value={eventTopic.id}>
+                                        {eventTopic.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                     </div>
                 </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">Location:</label>
-                    <input 
+                    <TextField 
                         onChange={
                             (evt) =>{
                                 const copy = {...newEvent}
@@ -150,17 +166,18 @@ export const CreateEvent = () =>{
                                 updateNewEvent(copy)
                             }
                         }
-                        required autoFocus
-                        type="text"
+                        required 
+                        id="outlined-required"
+                        label="Location"
                         className="form-control"
-                        placeholder="Enter the location of your event here." />
+                        placeholder="Enter the location of your event or course here"
+                        />
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="date">Date + Time of Event:</label>
-                    <textarea 
+                <div className="form-field">
+                    <TextField 
                         onChange={
                             (evt) =>{
                                 const copy = {...newEvent}
@@ -168,17 +185,20 @@ export const CreateEvent = () =>{
                                 updateNewEvent(copy)
                             }
                         }
-                        required autoFocus
-                        type="text"
+                        required
+                        id="outlined-multiline-flexible"
+                        label="Date + Time of Event"
+                        multiline
+                        maxRows={4}
                         className="form-control"
-                        placeholder="Enter the date and time of your event here. Hosting a course? List relevant dates, or sign up dates here." />
+                        placeholder="Enter the date and time of your event here. Hosting a course? List relevant dates, or sign up dates here." 
+                    />
                 </div>
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="details">Tell the people what they need to know about your event or course:</label>
-                    <textarea 
+                <div className="form-field">
+                    <TextField 
                         onChange={
                             (evt) =>{
                                 const copy = {...newEvent}
@@ -186,16 +206,20 @@ export const CreateEvent = () =>{
                                 updateNewEvent(copy)
                             }
                         }
-                        required autoFocus
-                        type="text"
+                        required
+                        id="outlined-multiline-flexible"
+                        label="Event Description"
+                        multiline
+                        maxRows={4}
                         className="form-control"
-                        placeholder="Give us a brief description of your event or course. Who is it for? what will it cover?" />
+                        placeholder="Give us a brief description of your event or course. Who is it for? what will it cover?" 
+                    />
                 </div>
             </fieldset>
 
             <button onClick={submitNewEvent}className="btn btn-primary">
                 Publish Event
             </button>
-        </form>
+        </Box>
     )
 }
