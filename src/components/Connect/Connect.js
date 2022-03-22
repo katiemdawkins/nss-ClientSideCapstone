@@ -44,7 +44,11 @@ export const MiniProfiles = () => {
         <>
         {
             <div>
-                <input placeholder="Search for a specific coach type" onChange={event=> setQuery(event.target.value)}></input>
+                <h3 className="headerLine">Connect with our personal trainers, yoga instructors, physical therapists, mental health therapists, and registered dieticians.</h3>
+                <div className="searchBar">
+                    <label className="searchLable">Search for a specific kind of coach here: </label>
+                    <input placeholder="Enter coach type" onChange={event=> setQuery(event.target.value)}></input>
+                </div>
             {
                 userProfiles.filter(userProfile => {
                     if(query === ''){
@@ -53,31 +57,35 @@ export const MiniProfiles = () => {
                         return userProfile
                     }
                 }).map((userProfile, index)=>(
-                    <div key={index} className="connectProfileInfo">
-                        <div className="connectInside">
-                        <h2 className="linkToProfile">
-                            <Link to={`/connect/${userProfile.id}`}>
-                                {userProfile.firstName} {userProfile.lastName}
-                            </Link>
-                        </h2>
-                            <h3>{userProfile.coachType.name}</h3>
-                            <p>Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
-                            <p>{userProfile.location}</p>
-                        </div>
-                        <div className="connectInside">
-                            <p className="bolder">Services Clients: </p>
-                            {
-                                coachLocations.map(
-                                    (coachLocation)=>{
-                                    if (coachLocation.userId === userProfile.userId){
-                                        return <p>{coachLocation.serviceLocation.name}</p>
-                                        }
+                    <div className="allCards">
+                        <div key={index}className="card">
+                            <img className="card-img-top" src={userProfile.imageURL} alt="Card image cap" />
+                            <div className="card-body">
+                                <h3 className="card-title">
+                                    <Link className= "linkMyWay" to={`/connect/${userProfile.id}`}>
+                                        {userProfile.firstName} {userProfile.lastName}
+                                    </Link>
+                                </h3>
+                                    <h5>{userProfile.coachType.name}</h5>
+                                    <p className="card-text">Taking New Clients: {userProfile.takingClients? "Yes": "No"}</p>
+                                    <p className="card-text">{userProfile.location}</p>
+                                
+                                    <p className="bolder">Services Clients: </p>
+                                    {
+                                        coachLocations.map(
+                                            (coachLocation)=>{
+                                                if (coachLocation.userId === userProfile.userId){
+                                                    return <p className="card-text">{coachLocation.serviceLocation.name}</p>
+                                                }
+                                            }
+                                            )
                                     }
-                                )
-                            }
+                                
+                                
+                            </div>
                         </div>
-                    </div>
-                ))
+                        </div>
+                ))  
             }
             </div>
            

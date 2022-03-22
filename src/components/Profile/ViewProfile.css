@@ -1,0 +1,57 @@
+.profilePage{
+    border: 2px solid lime;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    justify-content:center;
+    max-width: 500px;
+    padding: 10px;
+    margin: 20px;
+    border: solid 3px #00ada5; 
+}
+
+.topInfo{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.mainDetails{
+    border: 2px solid hotpink;
+
+    max-width: 60%;
+    padding: 10px;
+    margin: 20px;
+}
+
+.profileImg{
+    border: 2px solid yellow;
+    display: flex;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    height: fit-content;
+    justify-content: left;
+    vertical-align: middle;
+
+}
+
+.smallerDetails{
+    border: 2px solid blueviolet;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    width:fit-content;
+    flex-basis: auto;
+    margin-left: 3em;
+    padding: 1em;
+    border-radius: 4px;
+    background-color: #013d39;
+    color: #ffffff;
+}
+
+.btnSection{
+
+}

@@ -5,6 +5,7 @@ import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
 import { getAllEvents, getAllUserProfiles, getAllUsers } from "../ApiManager"
 import { UserProfile } from "./UsersProfile"
+import "./ViewProfile.css"
 
 export const ViewProfile = () => {
     const [userProfile, setUserProfile] = useState({})
@@ -49,38 +50,48 @@ export const ViewProfile = () => {
     return (
         <>
             {
-                <div className="profileInfo" key={`user--${userProfile.id}`}>
-                 <h2 className="profileName">{userProfile.firstName} {userProfile.lastName}</h2>
-                 <h3 className="profileType">{userProfile.coachType?.name}</h3> 
-                 <p>Specialties: {userProfile.specialties}</p>
-                 <p>Website: {userProfile.website}</p>
-                    <p>Email: {userProfile.email}</p>
-                    <p>Taking NewClients: {userProfile.takingClients? "Yes": "No"}</p>
-                    <p className="bolder">Service Location: </p>
-                    {
-                        currentCoachLocations.map(
-                            (currentCLocation)=>{
-                                if(currentCLocation.userId === userProfile.userId){
-                                    return <>
-                                    <p>{currentCLocation.serviceLocation.name}</p>
-                                    </>
+                <div className="profilePage" key={`user--${userProfile.id}`}>
+                    <div className="topInfo">
+                        <img src = {userProfile?.imageURL} alt= "Profile picture"/> 
+                            <div className="mainDetails">
+                                <h2 className="profileName">{userProfile.firstName} {userProfile.lastName}</h2>
+                                <h3 className="profileType">{userProfile.coachType?.name}</h3>
+                                <p>Bio: {userProfile.bio}</p>
+                            </div>
+                    </div>
+                    <div className="smallerDetails">
+                        <p>Specialties: {userProfile.specialties}</p>
+                        <p>Website: {userProfile.website}</p>
+                            <p>Email: {userProfile.email}</p>
+                            <p>Taking NewClients: {userProfile.takingClients? "Yes": "No"}</p>
+                            <p className="bolder">Service Location: </p>
+                            {
+                                currentCoachLocations.map(
+                                    (currentCLocation)=>{
+                                        if(currentCLocation.userId === userProfile.userId){
+                                            return <>
+                                            <p>{currentCLocation.serviceLocation.name}</p>
+                                            </>
+                                        }
+                                    }
+                                    )
                                 }
-                            }
-                        )
-                    }
-                    <p>Location: {userProfile.location}</p>
-                    <p>Bio: {userProfile.bio}</p>
-                    {
-                        events.map(
-                            (event)=>{
-                                if(event.userId === userProfile.userId){
-                                    return <p>Events + Courses: {event.name}</p>
+                            <p>Location: {userProfile.location}</p>
+                            {
+                                events.map(
+                                    (event)=>{
+                                        if(event.userId === userProfile.userId){
+                                            return <p>Events + Courses: {event.name}</p>
+                                        }
+                                    }
+                                    )
                                 }
-                            }
-                        )
-                    }
-                    
-                    <button className = "btn" onClick={() => history.push(`/connect`)}>Connect</button>
+                            
+                    </div>
+                    <div className="btnSection">
+                        <button className = "btn" onClick={() => history.push(`/connect/message`)}>Message</button>
+                        <button className = "btn" onClick={() => history.push(`/connect`)}>Connect with Others</button>
+                    </div>
                      
                 </div>
             }

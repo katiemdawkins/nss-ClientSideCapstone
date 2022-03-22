@@ -131,6 +131,7 @@ export const CreateEvent = () =>{
                             </TextField>
                     </div>
                 </fieldset>
+                
                 <fieldset>
                     <div className="form-group">
                              <TextField
