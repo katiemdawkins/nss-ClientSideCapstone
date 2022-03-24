@@ -1,14 +1,13 @@
+
 .profilePage{
-    border: 2px solid lime;
     display: flex;
     flex-wrap: wrap;
     flex-basis: auto;
-    justify-content:center;
-    max-width: 500px;
     padding: 10px;
     margin: 20px;
     border: solid 3px #00ada5; 
 }
+/* background-image: url("https://i.pinimg.com/originals/62/c0/99/62c099cd0f0e910174646af0a3060e26.jpg"); */
 
 .topInfo{
     display: flex;
@@ -19,18 +18,17 @@
 }
 
 .mainDetails{
-    border: 2px solid hotpink;
-
     max-width: 60%;
-    padding: 10px;
-    margin: 20px;
+    padding: 30px;
+    vertical-align: middle;
+    background-color: #00ada5;
+
 }
 
 .profileImg{
-    border: 2px solid yellow;
     display: flex;
-    border-radius: 5px 5px 0 0;
-    width: 100%;
+    border-radius: 5px;
+    width: 40%;
     height: fit-content;
     justify-content: left;
     vertical-align: middle;
@@ -38,20 +36,25 @@
 }
 
 .smallerDetails{
-    border: 2px solid blueviolet;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    width:fit-content;
+    width:100%;
     flex-basis: auto;
-    margin-left: 3em;
-    padding: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 2em;
     border-radius: 4px;
     background-color: #013d39;
     color: #ffffff;
 }
 
 .btnSection{
+ display: flex;
+ justify-content: center;
+}
 
+.locationList{
+    margin-top: none;
 }

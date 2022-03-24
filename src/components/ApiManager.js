@@ -38,16 +38,28 @@ export const getAllEventTopics = () =>{
     .then (res =>res.json())
 }
 
+export const getAllUserFavorites = () =>{
+    return fetch (`http://localhost:8088/userFavorites?_expand=user&_expand=userProfile`)
+    .then(res => res.json())
+}
+
 //delete event
 export const DeleteEvent = (id) => {
     return fetch(`http://localhost:8088/events/${id}`, {
         method: "DELETE"
     })
 }
-
+//delete previous coach locations
 export const DeleteCoachLocationObj = (id) =>{
     return fetch(`http://localhost:8088/coachLocations/${id}`,{
     method: "DELETE"
+    })
+}
+
+//delete users favoritee
+export const DeleteMyFavorite = (id) => {
+    return fetch(`http://localhost:8088/userFavorites/${id}`,{
+        method: "DELETE"
     })
 }
 

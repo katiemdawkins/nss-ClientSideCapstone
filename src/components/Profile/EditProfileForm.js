@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { DeleteCoachLocationObj, getAllCoachTypes, getAllServiceLocations, getAllUsers, getCoachLocations } from "../ApiManager";
 import "./ProfileForm.css"
 import UploadImages from "./UpLoadImg";
+import Checkbox from '@mui/material/Checkbox';
 
 ///create a new userProfile 
 export const EditProfileForm = () => {
@@ -24,6 +25,8 @@ export const EditProfileForm = () => {
     const [ coachTypes, setCoachTypes] = useState([])
     const [ serviceLocations, setServiceLocations ] = useState([])
     const [ coachLocationObjects, setCoachLocationObjects ] = useState([])
+
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
     const history = useHistory()
     const { userId } = useParams()
@@ -184,7 +187,7 @@ export const EditProfileForm = () => {
                                     }
                                 }
                                 required autoFocus
-                                className="form-control"
+                                className="form-select"
                                 placeholder="Select your coach type">
                                 <option value={currentUserProfile.coachTypeId}>What type of coach are you?</option>    
                                 {coachTypes.map((coachType) =>{
@@ -218,10 +221,13 @@ export const EditProfileForm = () => {
                                     }
                                 }
                                 required autoFocus
+                                className="form-check-input"
                                 type="checkbox"
-                                className="form-control"
-                                value={currentUserProfile.serviceLocationId}/>
-                            {serviceLocation.name}
+                                value={currentUserProfile.serviceLocationId}
+                                id="defaultCheck1"
+                                />
+                            <label className="form-check-label" for=" defaultCheck1">{serviceLocation.name}
+                            </label>
                             </>
                         })}
                     </div>
@@ -296,6 +302,7 @@ export const EditProfileForm = () => {
                             }
                         }
                         type="checkbox"
+                        className="form-check-input"
                         value={currentUserProfile.takingClients} />
                 </div>
             </fieldset>

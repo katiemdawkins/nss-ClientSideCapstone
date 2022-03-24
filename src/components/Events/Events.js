@@ -10,13 +10,11 @@ export const DisplayEvents = () => {
     const [ userProfiles, setUserProfiles ] = useState([])
 
     const history = useHistory()
-    const { eventId } = useParams()
 
 
     const eventsState = () => {
         getAllEvents()
-        .then(
-            (eventData) => {
+        .then((eventData) => {
             setEvents(eventData)
             })
     }

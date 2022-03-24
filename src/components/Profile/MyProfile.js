@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
 import { getAllEvents, getAllUserProfiles, getAllUsers } from "../ApiManager"
-import { UserProfile } from "./UsersProfile"
 import "./MyProfile.css"
 
 //create a function that takes a user to their profile
@@ -93,40 +92,37 @@ export const MyProfile = () => {
         }
         {
            <div className="profileInfo" key={`user--${userProfile?.id}`}>
-                <div className="bigInfo">
-                    <div className="profilePicture">
-                        <img src = {userProfile?.imageURL} alt= "Profile picture"/>
-                    </div>
-
-                    <div className="nameTypeBio">
+                <div className="topInfo">
+                        <img className="profileImg"src = {userProfile?.imageURL} alt= "Profile picture"/>
+                    <div className="mainDetails">
                         <h2 className="profileName">{userProfile?.firstName} {userProfile?.lastName}</h2>
                         <h3 className="profileType">{userProfile?.coachType?.name}</h3>
-                        <p>{userProfile?.bio}</p>
+                        <p>✉️ {userProfile?.email}</p>
                     </div>
                 </div>
-                <div className="userDetails">
-                        <p className="bolder">Specialties</p>
-                        <p>{userProfile?.specialties}</p>
+                <div className="smallerDetails">
                         <p className="bolder">Website</p>
                         <p>{userProfile?.website}</p>
-                        <p className="bolder">Email</p>
-                        <p>{userProfile?.email}</p>
-                        <p className="bolder">Taking New Clients?</p>
-                        <p>{userProfile?.takingClients? "Yes": "No"}</p>
                         <p className="bolder">Service Location</p>
                             {
                                 currentCoachLocations.map(
                                     (currentCLocation)=>{
                                         if(currentCLocation?.userId === userProfile?.userId){
                                             return <>
-                                            <p>{currentCLocation.serviceLocation?.name}</p>
+                                            <p className="locationList">• {currentCLocation.serviceLocation?.name}</p>
                                             </>
                                         }
                                     }
                                 )
                             }
+                        <p className="bolder">Taking New Clients?</p>
+                        <p>{userProfile?.takingClients? "Yes": "No"}</p>
                         <p className="bolder">Location</p>
                         <p>{userProfile?.location}</p>
+                        <p className="bolder">Specialties</p>
+                        <p>{userProfile?.specialties}</p>
+                        <p className="bolder">About {userProfile?.firstName}: </p>
+                        <p>{userProfile?.bio}</p>
                         <p className="bolder">Events + Courses</p>
                             {
                                 events.map(

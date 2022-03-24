@@ -1,9 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
 import { getAllEventTopics, getAllEventTypes, getCurrentEvent } from "../ApiManager";
-import { MenuItem } from "@mui/material";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 
 
 //create a function to edit events
@@ -72,20 +69,13 @@ useEffect(
 
 
     return(
-        <Box className="ticketForm"
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '35ch' },
-                }}
-                noValidate
-                autoComplete="off"
-            >
+        <form className="ticketForm">
             <h2 className="ticketForm__title">Create a New Event or Course</h2>
             
             <fieldset>
                 <div className="form-group">
                     <label>Name of Event or Course:</label>
-                    <TextField
+                    <input
                         onChange={
                             (evt) => {
                                 const copy = {...event}
@@ -93,7 +83,7 @@ useEffect(
                                 setEvent(copy)
                             }
                         }
-                        required 
+                        required autoFocus
                         id="outlined-required"
                         className="form-control"
                         value = {event.name}
@@ -104,7 +94,7 @@ useEffect(
             <fieldset>
                     <div className="form-group">
                     <label>Type of Event or Course:</label>
-                             <TextField
+                             <select
                                 onChange={
                                     (evt) => {
                                     const copy = {...event}
@@ -112,26 +102,24 @@ useEffect(
                                     setEvent(copy)
                                     }
                                 }
-                                id="outlined-select-type"
-                                select
-                                required
-                                className="form-control"
+                                required autoFocus
+                                className="form-select"
                                 value={event.eventTypeId}
                                 >
-
-                                {eventTypes.map((eventType) =>(
-                                    <MenuItem value={eventType.id} key={eventType.id}>
-                                        {eventType.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                <option value={event.eventTypeId}>{event.eventType?.name}</option>
+                                {eventTypes.map((eventType) =>{
+                                   return <option value={eventType.id} key={eventType.id}>
+                                        {eventType.name}</option>
+                                    
+                                })}
+                            </select>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <div className="form-group">
                     <label>Event or Course Topic:</label>
-                             <TextField
+                             <select
                                 onChange={
                                     (evt) => {
                                     const copy = {...event}
@@ -139,25 +127,24 @@ useEffect(
                                     setEvent(copy)
                                     }
                                 }
-                                id="outlined-select-topic"
-                                select
-                                required
-                                className="form-control"
+                                required autoFocus
+                                className="form-select"
                                 value={event.eventTopicId}
                             >
-                                {eventTopics.map((eventTopic) =>(
-                                    <MenuItem key ={eventTopic.id} value={eventTopic.id}>
+                                <option value={event.eventTopicId}>{event.eventTopic?.name}</option>
+                                {eventTopics.map((eventTopic) =>{
+                                    return <option key ={eventTopic.id} value={eventTopic.id}>
                                         {eventTopic.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                                    </option>
+                                })}
+                            </select>
                     </div>
                 </fieldset>
 
                 <fieldset>
                 <div className="form-group">
                 <label>Location of Event or Course:</label>
-                    <TextField 
+                    <input 
                         onChange={
                             (evt) =>{
                                 const copy = {...event}
@@ -165,8 +152,7 @@ useEffect(
                                 setEvent(copy)
                             }
                         }
-                        required 
-                        id="outlined-required"
+                        required autoFocus
                         className="form-control"
                         value={event.location}
                         
@@ -177,7 +163,7 @@ useEffect(
             <fieldset>
                 <div className="form-field">
                 <label>Date of Event or Course:</label>
-                    <TextField 
+                    <input 
                         onChange={
                             (evt) =>{
                                 const copy = {...event}
@@ -185,10 +171,7 @@ useEffect(
                                 setEvent(copy)
                             }
                         }
-                        required
-                        id="outlined-multiline-flexible"
-                        multiline
-                        maxRows={4}
+                        required autoFocus
                         className="form-control"
                         value= {event.date} 
                     />
@@ -198,7 +181,7 @@ useEffect(
             <fieldset>
                 <div className="form-field">
                 <label>Details for your Event or Course:</label>
-                    <TextField 
+                    <textarea 
                         onChange={
                             (evt) =>{
                                 const copy = {...event}
@@ -206,10 +189,7 @@ useEffect(
                                 setEvent(copy)
                             }
                         }
-                        required
-                        id="outlined-multiline-flexible"
-                        multiline
-                        maxRows={4}
+                        required autoFocus
                         className="form-control"
                         value = {event.details}
                     />
@@ -219,6 +199,6 @@ useEffect(
             <button onClick={editCurrentEvent}className="btn btn-primary">
                 Publish Event
             </button>
-        </Box>
+        </form>
     )
 }

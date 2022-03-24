@@ -1,9 +1,11 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { MyFavorites } from "../favorites.js/MyFavorites"
 import { MiniProfiles } from "./Connect/Connect"
 import { CreateEvent } from "./Events/CreateEvent"
 import { EditEvent } from "./Events/EditEvent"
 import { DisplayEvents } from "./Events/Events"
+import { ViewEvent } from "./Events/ViewEvent"
 import { HomePage } from "./home/Home"
 import { EditProfileForm } from "./Profile/EditProfileForm"
 import { MyProfile } from "./Profile/MyProfile"
@@ -33,6 +35,9 @@ export const ApplicationViews = () => {
             <Route exact path="/connect/:userId(\d+)">
                 <ViewProfile />
             </Route>
+            <Route exact path="/myFavorites">
+                <MyFavorites />
+            </Route>
             <Route exact path="/eventsCourses">
                 <DisplayEvents />
             </Route>
@@ -41,6 +46,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/eventsCourses/edit/:eventId(\d+)">
                 <EditEvent />
+            </Route>
+            <Route exact path="/eventsCourses/viewEvent/:eventId(\+d)">
+                <ViewEvent />
             </Route>
         </>
     )
