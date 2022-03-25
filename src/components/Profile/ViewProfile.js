@@ -85,10 +85,14 @@ export const ViewProfile = () => {
                             </div>
                     </div>
                     <div className="smallerDetails">
-                        <p className="bolder">Website: </p>
-                        <p>{userProfile.website}</p>
-                        <p className="bolder">Taking NewClients: </p>
-                        <p>{userProfile.takingClients? "Yes": "No"}</p>
+                         <p className="textdetail"><strong>Specialties: </strong>{userProfile.specialties}</p>
+                         <p className="textdetail"><strong>About {userProfile.firstName}: </strong>
+                         {
+                            userProfile.bio?.split("\n")
+                            .map(paragraph => <p>{paragraph}</p>)
+                         }</p>
+                        <p className="textdetail"><strong>Website: </strong>{userProfile.website}</p>
+                        <p className="textdetail"><strong>Taking NewClients:</strong> {userProfile.takingClients? "Yes": "No"}</p>
                          <p className="bolder">Service Location: </p>
                             {
                                 currentCoachLocations.map(
@@ -101,10 +105,6 @@ export const ViewProfile = () => {
                                     }
                                 )
                             }
-                        <p className="bolder">Specialties: </p>
-                        <p>{userProfile.specialties}</p>
-                        <p className="bolder">About {userProfile.firstName}:</p>
-                        <p> {userProfile.bio}</p>
                         <p className="bolder">Events + Courses: </p>
                             {
                                 events.map(

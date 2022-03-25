@@ -3,7 +3,6 @@ import { useHistory, useParams } from "react-router-dom"
 import { DeleteCoachLocationObj, getAllCoachTypes, getAllServiceLocations, getAllUsers, getCoachLocations } from "../ApiManager";
 import "./ProfileForm.css"
 import UploadImages from "./UpLoadImg";
-import Checkbox from '@mui/material/Checkbox';
 
 ///create a new userProfile 
 export const EditProfileForm = () => {
@@ -204,8 +203,8 @@ export const EditProfileForm = () => {
                 </fieldset>
 
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="serviceLocations">Services Clients:</label>
+                    <div className="custom-control custom-checkbox">
+                        <label className ="custom-control-label" htmlFor="customCheck1">Services Clients:</label>
                         {serviceLocations.map((serviceLocation) => {
                             return <>
                             <input 
@@ -221,12 +220,13 @@ export const EditProfileForm = () => {
                                     }
                                 }
                                 required autoFocus
-                                className="form-check-input"
+                                className="custom-control-input"
+                                id="customCheck1"
                                 type="checkbox"
                                 value={currentUserProfile.serviceLocationId}
                                 id="defaultCheck1"
                                 />
-                            <label className="form-check-label" for=" defaultCheck1">{serviceLocation.name}
+                            <label className="custom-control-label" for="customCheck1">{serviceLocation.name}
                             </label>
                             </>
                         })}
@@ -343,6 +343,8 @@ export const EditProfileForm = () => {
                             required autoFocus
                             type="text"
                             className="form-control"
+                            id="bio"
+                            rows="5"
                             value={currentUserProfile.bio}
                         />
                     </div>

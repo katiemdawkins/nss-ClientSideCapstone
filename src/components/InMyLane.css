@@ -13,3 +13,7 @@ body {
 .homeHeader{
     color: #013639;
 }
+
+*{
+    font-family: 'Nunito Sans', sans-serif;
+}

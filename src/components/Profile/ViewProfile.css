@@ -1,11 +1,12 @@
 
 .profilePage{
-    display: flex;
-    flex-wrap: wrap;
-    flex-basis: auto;
-    padding: 10px;
-    margin: 20px;
+   padding: 20px;
     border: solid 3px #00ada5; 
+    width:50%;
+    margin-left: auto;
+    margin-right:auto;
+    display:grid;
+    place-items:center;
 }
 /* background-image: url("https://i.pinimg.com/originals/62/c0/99/62c099cd0f0e910174646af0a3060e26.jpg"); */
 

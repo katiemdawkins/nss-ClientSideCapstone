@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react"
 import { useHistory, useParams } from "react-router"
 import { Link } from "react-router-dom"
 import { DeleteMyFavorite, getAllCoachTypes, getAllUserFavorites } from "../components/ApiManager"
-
+import "./MyFavorites.css"
 
 export const MyFavorites = () => {
 //get state of user favorites & expand 
@@ -53,11 +53,11 @@ export const MyFavorites = () => {
                         const foundCoachTypeName = coachTypes.find(coachTypeObj => {
                             return(coachTypeObj.id === userFavorite.userProfile.coachTypeId)
                         })
-                        return <div className="allCards">
-                            <div className="card">
-                                <img className="card-img-top" src={userFavorite.userProfile.imageURL} alt="Profile Picture" />
-                                <div className="card-body">
-                                    <h3 className="card-title">
+                        return <div className="favCards">
+                            <div className="favCard">
+                                <img className="favCardImg" src={userFavorite.userProfile.imageURL} alt="Profile Picture" />
+                                <div className="favCardBody">
+                                    <h3 className="favCard-title">
                                         <Link className="linkMyWay" to= {`/connect/${userFavorite.userProfile.id}`}>{userFavorite.userProfile.firstName} {userFavorite.userProfile.lastName}
                                         </Link>
                                     </h3>

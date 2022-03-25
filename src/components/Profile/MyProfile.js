@@ -91,19 +91,26 @@ export const MyProfile = () => {
                     
         }
         {
-           <div className="profileInfo" key={`user--${userProfile?.id}`}>
+           <div className="profileYAAAS" key={`user--${userProfile?.id}`}>
                 <div className="topInfo">
                         <img className="profileImg"src = {userProfile?.imageURL} alt= "Profile picture"/>
                     <div className="mainDetails">
                         <h2 className="profileName">{userProfile?.firstName} {userProfile?.lastName}</h2>
                         <h3 className="profileType">{userProfile?.coachType?.name}</h3>
                         <p>✉️ {userProfile?.email}</p>
+                        <p>📍 {userProfile?.location}</p>
                     </div>
                 </div>
                 <div className="smallerDetails">
-                        <p className="bolder">Website</p>
-                        <p>{userProfile?.website}</p>
-                        <p className="bolder">Service Location</p>
+                        <p className="detail"><strong>Specialties:</strong>  {userProfile?.specialties}</p>
+                        <p className="detail"><strong>About {userProfile?.firstName}:</strong>  
+                        {
+                            userProfile?.bio?.split("\n")
+                                .map(paragraph => <p>{paragraph}</p>)
+                        }</p>
+                        <p className="detail"><strong>Website:</strong>  {userProfile?.website}</p>
+                        <p className="detail"><strong>Taking New Clients?</strong>  {userProfile?.takingClients? "Yes": "No"}</p>
+                        <p className="detail"><strong>Services Clients</strong></p>
                             {
                                 currentCoachLocations.map(
                                     (currentCLocation)=>{
@@ -115,15 +122,7 @@ export const MyProfile = () => {
                                     }
                                 )
                             }
-                        <p className="bolder">Taking New Clients?</p>
-                        <p>{userProfile?.takingClients? "Yes": "No"}</p>
-                        <p className="bolder">Location</p>
-                        <p>{userProfile?.location}</p>
-                        <p className="bolder">Specialties</p>
-                        <p>{userProfile?.specialties}</p>
-                        <p className="bolder">About {userProfile?.firstName}: </p>
-                        <p>{userProfile?.bio}</p>
-                        <p className="bolder">Events + Courses</p>
+                        <p className="detail"><strong>Events + Courses:</strong></p>
                             {
                                 events.map(
                                     (event)=>{

@@ -1,9 +1,9 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: left;
+    justify-content: center;
     background-color: #013d39;
-    padding:3px;
+    padding:15px;
     text-align:center;
     list-style: none;
 }
@@ -26,5 +26,6 @@
     text-align:center;
     text-decoration: none;
     list-style: none;
+    font-size: 20px;
 }
 

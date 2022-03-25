@@ -1,6 +1,4 @@
 .eventCourse {
-    display:flex;
-    flex-direction: column;
     border: 2px solid #00ada5;
     margin: 1em;
     padding: 1em;
@@ -34,3 +32,41 @@ button:hover {
     display: row;
 }
 
+.form-control:focus{
+  border-color: #00ada5;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #00ada5;
+}
+
+.form-select:focus{
+  border-color: #00ada5;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #00ada5;
+}
+
+.align-right{
+  text-align: right;
+  margin-right: 20px;
+  margin-bottom:20px;
+}
+
+.evtLinkStyle {
+  color:#00ada5;
+  text-decoration: none;
+}
+.evtLinkStyle:hover{
+  color:#888888;
+  text-decoration: none;
+}
+
+
+.eventCards{
+  display:grid;
+  grid-auto-flow: row;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(25em, 25em));
+  justify-items: center;
+  justify-content: space-evenly; 
+} 
+
+
+.eventCards > * { flex: 1; }
+.eventCards > * { flex-basis: 33%; }
