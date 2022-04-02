@@ -47,7 +47,7 @@ export const ApplicationViews = () => {
             <Route exact path="/eventsCourses/edit/:eventId(\d+)">
                 <EditEvent />
             </Route>
-            <Route exact path="/eventsCourses/viewEvent/:eventId(\+d)">
+            <Route exact path="/eventsCourses/viewEvent/:eventId(\d+)">
                 <ViewEvent />
             </Route>
         </>

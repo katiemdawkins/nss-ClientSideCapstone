@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react"
-import { useParams } from "react-router"
+import { useParams, useHistory } from "react-router"
 import { getAllEventTopics, getAllUsers } from "../ApiManager"
 
 
@@ -10,6 +10,7 @@ export const ViewEvent = () => {
     const [ eventTopics, setEventTopics ] = useState([])
 
     const { eventId } = useParams()
+    const history = useHistory()
 
     useEffect(
         ()=>{
@@ -43,9 +44,18 @@ export const ViewEvent = () => {
 
     return (
         <>
-        <h2>Particular Event</h2>
-        <div>
-            <h2>{eventObject.name}</h2>
+        <h2 className="singleEventDetails">Event Details...</h2>
+        <div className="singleEventCourse" key={eventObject.id}>
+            <h3 key={eventObject.name}>{eventObject.name}</h3>
+            <p>Hosted By: {eventObject.user?.firstName} {eventObject.user?.lastName}</p>
+            <p>Event Topic: {eventObject.eventTopic?.name}</p>
+            <p>Type of Event: {eventObject.eventType?.name}</p>
+            <p>Where? {eventObject.location}</p>
+            <p>When? {eventObject.date}</p>
+            <p>Details: {eventObject.details}</p>
+        </div>
+        <div className="evtCrsBtn">
+            <button onClick={()=> history.push(`/eventsCourses`)}>View Other Events + Courses</button>
         </div>
         </>
     )

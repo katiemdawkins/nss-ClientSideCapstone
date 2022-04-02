@@ -67,7 +67,7 @@ export const MiniProfiles = () => {
                                         </Link>
                                     </h3>
                                     <h5>{userProfile.coachType.name}</h5>
-                                    <p className="card-text"><strong>Taking New Clients:</strong>  {userProfile.takingClients? "Yes": "No"}</p>
+                                    <p className="card-text"><strong>Taking New Clients: </strong>  {userProfile.takingClients? " Yes": " No"}</p>
                                     <p className="card-text"><strong>Location:</strong>  {userProfile.location}</p>
                                     
                                     <p className="card-text"><strong>Services Clients: </strong></p>

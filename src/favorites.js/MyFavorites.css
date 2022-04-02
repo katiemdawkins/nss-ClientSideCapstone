@@ -1,20 +1,27 @@
+.favsHeader{
+    text-align: center;
+}
+
 .favCards{
     display:grid;
-    width:33%;
+    width:40%;
+    place-items: center;
+    margin-left: auto;
+    margin-right:auto;
 }
 
 .favCard{
     border: solid 4px #00ada5;
     width:100%;
     padding:10px;
-    margin:20px;
+    margin:10px;
     display:flex;
     flex-direction: row;
 }
 
 .favCardImg{
     display: flex;
-    width:40%;
+    width:35%;
     border-radius: 5px;
     height: fit-content;
     vertical-align: middle;
@@ -27,7 +34,8 @@
     color:#ffffff;
     width:55%;
     padding:10px;
-    margin:20px;
+    margin-left: 25px;
+    margin-right: auto;
     vertical-align: middle;
 
 }

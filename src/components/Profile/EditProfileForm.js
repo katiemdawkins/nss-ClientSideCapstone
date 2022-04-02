@@ -224,9 +224,9 @@ export const EditProfileForm = () => {
                                 id="customCheck1"
                                 type="checkbox"
                                 value={currentUserProfile.serviceLocationId}
-                                id="defaultCheck1"
+                                
                                 />
-                            <label className="custom-control-label" for="customCheck1">{serviceLocation.name}
+                            <label className="custom-control-label" htmlFor="customCheck1">{serviceLocation.name}
                             </label>
                             </>
                         })}

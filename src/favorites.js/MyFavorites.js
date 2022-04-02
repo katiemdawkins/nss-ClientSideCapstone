@@ -45,7 +45,7 @@ export const MyFavorites = () => {
 
     return(
         <>
-        <h2>My Favorites</h2>
+        <h2 className="favsHeader">My Favorites...</h2>
         {
             allUserFavorites.map(
                 (userFavorite)=>{

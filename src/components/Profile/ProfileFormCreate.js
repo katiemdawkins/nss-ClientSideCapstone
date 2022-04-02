@@ -176,8 +176,8 @@ export const ProfileForm = () => {
                 </fieldset>
 
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="serviceLocations">Services Clients:  </label>
+                    <div className="custom-control custom-checkbox">
+                        <label className ="custom-control-label" htmlFor="customCheck1">Services Clients:  </label>
                         {serviceLocations.map((serviceLocation) => {
                             return <>
                             <input 
@@ -194,9 +194,11 @@ export const ProfileForm = () => {
                                 }
                                 required autoFocus
                                 type="checkbox"
-                                className="form-control"
+                                className="custom-control-input"
+                                id="customCheck1"
                                 />
-                            {serviceLocation.name}
+                            <label className="custom-control-label" htmlFor="customCheck1">{serviceLocation.name}
+                            </label>
                             </>
                         })}
                     </div>
