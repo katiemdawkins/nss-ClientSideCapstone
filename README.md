@@ -11,13 +11,8 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 ![Untitled design (19)](https://user-images.githubusercontent.com/97056303/161585767-6cbdd2ae-5190-423a-b3b2-a2add1abe088.png)
 
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Links
+[ERD](https://drawsql.app/nss-14/diagrams/front-end-capstone)
 
 ### `npm test`
 
