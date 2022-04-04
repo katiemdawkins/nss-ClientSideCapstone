@@ -6,68 +6,36 @@ Users will be able to view all of the network’s coach profiles, search for spe
 
 Wellness takes a village. This app aims to help professionals stay in their lane and do what they do best. As clients' needs change, professionals can refer out to other coaches who have a similar non-diet focus and approach to care.
 
-## Profiles + Favorites
+## Coach Profiles + Favorites
 
 ![Untitled design (19)](https://user-images.githubusercontent.com/97056303/161585767-6cbdd2ae-5190-423a-b3b2-a2add1abe088.png)
 
 
-### Links
+## Links
 [ERD](https://drawsql.app/nss-14/diagrams/front-end-capstone),
 
 [Capstone Proposal](https://docs.google.com/document/d/1x8UNoq1s5uIwgmegno78FuS4KkaySLv-de84nCpO-hg/edit?usp=sharing)
 
-### Wireframe
+
+## Wireframe
 
 ![Untitled design (19) copy](https://user-images.githubusercontent.com/97056303/161589693-5bed4ad9-34c7-4d9b-8464-0afe877e205a.png)
 
 
-### `npm run build`
+### To Install
+1. Clone down project directory git@github.com:katiemdawkins/nss-ClientSideCapstone.git
+2. Run npm install
+3. Clone down the api git@github.com:katiemdawkins/nss-client-side-capstone-api.git
+4. Run json-server -p 8088 database.json
+5. Open http://localhost:3000 to view it in the browser
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Tools Used
+-VS Code
+-Bootstrap
+-Javascript
+-drawSQL
+-OneNote
+-JSON Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Lessons Learned
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# nss-ClientSideCapstone
