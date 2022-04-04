@@ -1,10 +1,18 @@
-# Getting Started with Create React App
+# In My Lane - A Referral Network for Non-Diet Professionals
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In My Lane will help non-diet professionals- personal trainers, physical therapists, yoga instructors, registered dietitians, and mental health therapists specializing in body image and eating disorders - build up their referral network and promote upcoming events. 
 
-## Available Scripts
+Users will be able to view all of the network’s coach profiles, search for specific types of coaches, and favorite the coaches they’d like to refer clients too. Users will also be able to post upcoming events that they are hosting, and search for specific types of events that they or their clients might benefit from attending.
 
-In the project directory, you can run:
+Wellness takes a village. This app aims to help professionals stay in their lane and do what they do best. As clients' needs change, professionals can refer out to other coaches who have a similar non-diet focus and approach to care.
+
+## Profiles + Favorites
+
+![1](https://user-images.githubusercontent.com/97056303/161583745-6e5e2754-1ce5-4db7-9fac-6dc3b79a84d0.png)
+
+![2](https://user-images.githubusercontent.com/97056303/161583783-bb6a88ec-d148-43ca-94ed-efb82972dd96.png)
+
+![3](https://user-images.githubusercontent.com/97056303/161583797-e55db146-b368-4e16-ba86-d808094b58bb.png)
 
 ### `npm start`
 
