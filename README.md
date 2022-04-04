@@ -28,14 +28,12 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 3. Clone down the api git@github.com:katiemdawkins/nss-client-side-capstone-api.git
 4. Run json-server -p 8088 database.json
 5. Open http://localhost:3000 to view it in the browser
+6. You can create/edit your user profile, create/edit your event, view and search for events, view and search the network of coaches, and favorite coaches of interest to you.
 
 ### Tools Used
--VS Code
--Bootstrap
--Javascript
--drawSQL
--OneNote
--JSON Server
-
-### Lessons Learned
-
+*Javascript
+*JSON-Server
+*VS Code
+*Bootstrap
+*drawSQL
+*OneNote
