@@ -8,7 +8,7 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 
 ## Profiles + Favorites
 
-![1](https://user-images.githubusercontent.com/97056303/161583745-6e5e2754-1ce5-4db7-9fac-6dc3b79a84d0.png | width=100)
+![1](https://user-images.githubusercontent.com/97056303/161583745-6e5e2754-1ce5-4db7-9fac-6dc3b79a84d0.png)
 
 ![2](https://user-images.githubusercontent.com/97056303/161583783-bb6a88ec-d148-43ca-94ed-efb82972dd96.png)
 
