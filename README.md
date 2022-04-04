@@ -31,9 +31,9 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 6. You can create/edit your user profile, create/edit your event, view and search for events, view and search the network of coaches, and favorite coaches of interest to you.
 
 ### Tools Used
-*Javascript
-*JSON-Server
-*VS Code
-*Bootstrap
-*drawSQL
-*OneNote
+⋅⋅*Javascript
+⋅⋅*JSON-Server
+⋅⋅*VS Code
+⋅⋅*Bootstrap
+⋅⋅*drawSQL
+⋅⋅*OneNote
