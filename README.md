@@ -14,14 +14,12 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 ### Links
 [ERD](https://drawsql.app/nss-14/diagrams/front-end-capstone),
 
-[Wireframe](https://1drv.ms/u/s!AnZMLJ9MPJhyabGKRx0Mjl8dJZ0),
+[Capstone Proposal](https://docs.google.com/document/d/1x8UNoq1s5uIwgmegno78FuS4KkaySLv-de84nCpO-hg/edit?usp=sharing)
 
-[Capstone Proposal] (https://docs.google.com/document/d/1x8UNoq1s5uIwgmegno78FuS4KkaySLv-de84nCpO-hg/edit?usp=sharing)
+### Wireframe
 
-### `npm test`
+![Untitled design (19) copy](https://user-images.githubusercontent.com/97056303/161589693-5bed4ad9-34c7-4d9b-8464-0afe877e205a.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
