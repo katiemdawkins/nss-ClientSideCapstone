@@ -14,7 +14,7 @@ Wellness takes a village. This app aims to help professionals stay in their lane
 ## Links
 [ERD](https://drawsql.app/nss-14/diagrams/front-end-capstone),
 
-[Capstone Proposal](https://docs.google.com/document/d/1x8UNoq1s5uIwgmegno78FuS4KkaySLv-de84nCpO-hg/edit?usp=sharing)
+[Capstone Proposal](https://docs.google.com/document/d/1x8UNoq1s5uIwgmegno78FuS4KkaySLv-de84nCpO-hg/edit?usp=sharing),
 
 [Video Walkthrough of the App] (https://www.youtube.com/watch?v=wuM0h3Lblrg&t=21s)
 
